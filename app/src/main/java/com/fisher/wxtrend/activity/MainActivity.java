@@ -1,10 +1,13 @@
 package com.fisher.wxtrend.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.fisher.wxtrend.R;
 import com.fisher.wxtrend.adapter.TabAdapter;
@@ -14,6 +17,8 @@ public class MainActivity extends FragmentActivity {
     private TabPageIndicator mPageIndicator;
     private ViewPager mViewPager;
     private FragmentPagerAdapter fragPagerAdapter;
+
+    private ImageView typeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,19 @@ public class MainActivity extends FragmentActivity {
     private void initUI() {
         mPageIndicator = (TabPageIndicator) findViewById(R.id.page_indicator);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        typeBtn = (ImageView) findViewById(R.id.typeByn);
+        typeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                typeBtn.setImageResource(R.drawable.act_down);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, TypeActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
 
 }

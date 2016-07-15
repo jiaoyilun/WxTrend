@@ -27,6 +27,9 @@
             android:theme="@style/MyTheme">
         </activity>
         <activity android:name=".activity.ArticleItemActivity"/>
+        <activity
+            android:name=".activity.TypeActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
