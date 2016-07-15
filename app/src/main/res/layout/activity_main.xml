@@ -32,7 +32,7 @@
             android:id="@+id/page_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/transparentblue"/>
+            android:background="@color/graybg"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
