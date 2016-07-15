@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/graybg"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:singleLine="false"
+            android:text="@string/text_type_switch"
+            android:textAlignment="inherit"
+            />
+
+        <ImageView
+            android:id="@+id/btn_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:src="@drawable/act_up"
+            />
+
+    </RelativeLayout>
+
+    <com.fisher.wxtrend.ui.DragSortGridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/activity_grid_view_sort_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:clipToPadding="false"
+        android:horizontalSpacing="10dp"
+        android:numColumns="4"
+        android:padding="10dp"
+        android:verticalSpacing="10dp">
+
+    </com.fisher.wxtrend.ui.DragSortGridView>
+
+</LinearLayout>

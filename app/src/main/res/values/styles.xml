@@ -38,4 +38,10 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="PopupAnimation" parent="android:Animation" mce_bogus="1">
+        <item name="android:windowEnterAnimation">@animator/popup_enter</item>
+        <item name="android:windowExitAnimation">@animator/popup_exit</item>
+    </style>
+
 </resources>
