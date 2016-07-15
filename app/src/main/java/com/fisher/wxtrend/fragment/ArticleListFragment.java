@@ -1,9 +1,9 @@
 package com.fisher.wxtrend.fragment;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fisher.wxtrend.R;
+import com.fisher.wxtrend.activity.ArticleItemActivity;
 import com.fisher.wxtrend.adapter.ArticleListAdapter;
 import com.fisher.wxtrend.http.HttpMethods;
 import com.fisher.wxtrend.po.PageData;
@@ -56,17 +57,10 @@ public class ArticleListFragment extends Fragment {
                 articleListAdapter.setmOnItemClickListener(new ArticleListAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, Object obj) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", String.valueOf(obj));
-
-                        ArticleItemFragment articlItemFragment = new ArticleItemFragment();
-                        articlItemFragment.setArguments(bundle);
-
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.content_frame, articlItemFragment);
-
-                        transaction.addToBackStack(null);
-                        transaction.commit();
+                        Intent intent = new Intent();
+                        intent.putExtra("url", String.valueOf(obj));
+                        intent.setClass(getActivity(), ArticleItemActivity.class);
+                        startActivity(intent);
                     }
                 });
 
