@@ -44,6 +44,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
     public void onBindViewHolder(RecVH holder, int position) {
         WxArticle article = articleList.get(position);
         holder.news_item_title.setText(article.getTitle());
+        holder.news_item_date.setText(article.getDate());
         ViewUtil.displayImg(context, article.getContentImg(), holder.news_item_icon);
 
 
@@ -65,11 +66,13 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
     public class RecVH extends RecyclerView.ViewHolder {
         ImageView news_item_icon;
         TextView news_item_title;
+        TextView news_item_date;
 
         public RecVH(View itemView) {
             super(itemView);
             news_item_icon = (ImageView) itemView.findViewById(R.id.news_item_icon);
             news_item_title = (TextView) itemView.findViewById(R.id.news_item_title);
+            news_item_date = (TextView) itemView.findViewById(R.id.news_item_date);
         }
     }
 
