@@ -37,16 +37,6 @@ public class TypeFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onActivityCreated");
-
-        super.onActivityCreated(savedInstanceState);
-        mGridView = (DragSortGridView) root.findViewById(R.id.activity_grid_view_sort_main);
-
-        HttpMethods.getInstance().getWxArticleType(new ProgressSubscriber(getDataOnNext, getActivity()));
-    }
-
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -67,4 +57,15 @@ public class TypeFragment extends Fragment {
             }
         };
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onActivityCreated");
+
+        super.onActivityCreated(savedInstanceState);
+        mGridView = (DragSortGridView) root.findViewById(R.id.activity_grid_view_sort_main);
+
+        HttpMethods.getInstance().getWxArticleType(new ProgressSubscriber(getDataOnNext, getActivity()));
+    }
+
 }

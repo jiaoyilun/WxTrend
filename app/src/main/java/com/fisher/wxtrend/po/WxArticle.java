@@ -1,5 +1,9 @@
 package com.fisher.wxtrend.po;
 
+import android.text.TextUtils;
+
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Administrator on 2016/7/14/.
  */
@@ -18,15 +22,25 @@ public class WxArticle {
      * userName : 人民日报
      */
 
+    @SerializedName("contentImg")
     private String contentImg;
+    @SerializedName("date")
     private String date;
+    @SerializedName("id")
     private String id;
+    @SerializedName("title")
     private String title;
+    @SerializedName("typeId")
     private String typeId;
+    @SerializedName("typeName")
     private String typeName;
+    @SerializedName("url")
     private String url;
+    @SerializedName("userLogo")
     private String userLogo;
+    @SerializedName("userLogo_code")
     private String userLogo_code;
+    @SerializedName("userName")
     private String userName;
 
     public String getContentImg() { return contentImg;}
@@ -41,7 +55,12 @@ public class WxArticle {
 
     public void setId(String id) { this.id = id;}
 
-    public String getTitle() { return title;}
+    public String getTitle() {
+        if (!TextUtils.isEmpty(title)) {
+            title = title.replaceAll("&nbsp;", " ");
+        }
+        return title;
+    }
 
     public void setTitle(String title) { this.title = title;}
 
