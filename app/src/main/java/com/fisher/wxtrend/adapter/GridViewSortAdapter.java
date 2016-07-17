@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,10 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fisher.wxtrend.R;
+import com.fisher.wxtrend.ui.BadgeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +24,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/7/14/.
  */
-public class GridViewSortAdapter extends BaseAdapter
+public class GridViewSortAdapter extends BaseAdapter implements View.OnClickListener
 {
     private static final String TAG = "GridViewSortAdapter";
 
@@ -46,6 +49,8 @@ public class GridViewSortAdapter extends BaseAdapter
     private GridView mGridView;
 
     private boolean mInAnimation;
+
+    private boolean showBadgeView;
 
     public GridViewSortAdapter(GridView gridView, Context context, List<String> typeTitle)
     {
@@ -235,6 +240,7 @@ public class GridViewSortAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
+        Log.d(TAG,"getView~~~~~");
         ViewHolder holder = null;
         if (convertView == null)
         {
@@ -249,11 +255,15 @@ public class GridViewSortAdapter extends BaseAdapter
         }
         holder.title.setText(mTypeTitle.get(position));
 
-       /* BadgeView badgeView = new BadgeView(mContext);
-        badgeView.setBadgeCount(2);
-        badgeView.setBadgeGravity(Gravity.LEFT|Gravity.TOP);
-        badgeView.setBadgeMargin(-3,-3,0,0);
-        badgeView.setTargetView(holder.title);*/
+        if(showBadgeView){
+            holder.closeBtn = new BadgeView(mContext);
+            holder.closeBtn.setBadgeCount(2);
+            holder.closeBtn.setBadgeGravity(Gravity.LEFT|Gravity.TOP);
+            holder.closeBtn.setBadgeMargin(-3,-3,0,0);
+            holder.closeBtn.setTargetView(holder.title);
+            holder.closeBtn.setTag(position);
+            holder.closeBtn.setOnClickListener(this);
+        }
 
         if (mStartHideItemPosition == position)
         {
@@ -266,10 +276,22 @@ public class GridViewSortAdapter extends BaseAdapter
         return convertView;
     }
 
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(mContext,"删除了"+v.getTag(),Toast.LENGTH_LONG).show();
+        this.hideView((Integer) v.getTag());
+    }
+
     class ViewHolder
     {
         public TextView title;
+        public BadgeView closeBtn;
+
     }
 
+    public void showBadgeView(){
+        showBadgeView = true;
+        notifyDataSetChanged();
+    }
 
 }

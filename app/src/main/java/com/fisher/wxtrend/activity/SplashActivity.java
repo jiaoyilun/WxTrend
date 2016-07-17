@@ -24,7 +24,8 @@ public class SplashActivity extends Activity {
 
     private void initData() {
         start_anima = new AlphaAnimation(0.3f, 1.0f);
-        start_anima.setDuration(2000);
+        //TODO 等待时间
+        start_anima.setDuration(500);
         view.startAnimation(start_anima);
         start_anima.setAnimationListener(new Animation.AnimationListener() {
 

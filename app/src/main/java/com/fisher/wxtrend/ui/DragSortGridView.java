@@ -70,6 +70,9 @@ public class DragSortGridView extends GridView implements AdapterView.OnItemLong
         // 至少有两个item的时候，才有排序
         if (getChildCount() >= 2)
         {
+            ((GridViewSortAdapter) getAdapter()).showBadgeView();
+
+            Log.d(TAG,"e");
             mView = view;
             // 在调用getDrawingCache必须先调用
             view.setDrawingCacheEnabled(true);
@@ -107,6 +110,7 @@ public class DragSortGridView extends GridView implements AdapterView.OnItemLong
     @Override
     public boolean onTouchEvent(MotionEvent ev)
     {
+
         switch (ev.getAction() & ev.getActionMasked())
         {
             case MotionEvent.ACTION_DOWN:
@@ -117,6 +121,7 @@ public class DragSortGridView extends GridView implements AdapterView.OnItemLong
             case MotionEvent.ACTION_MOVE:
                 if (mDragStarted)
                 {
+                    Log.d(TAG,"c");
                     // 保持中心
                     mDragItemLayoutParams.x = (int) (ev.getRawX() - mDragItemView.getWidth() / 2);
                     mDragItemLayoutParams.y = (int) (ev.getRawY() - mDragItemView.getHeight() / 2);
@@ -135,6 +140,7 @@ public class DragSortGridView extends GridView implements AdapterView.OnItemLong
             case MotionEvent.ACTION_UP:
                 if (mDragStarted)
                 {
+                    Log.d(TAG,"d");
                     mWindowManager.removeView(mDragItemView);
                     ((GridViewSortAdapter) getAdapter()).clear();
                     mDragStarted = false;
