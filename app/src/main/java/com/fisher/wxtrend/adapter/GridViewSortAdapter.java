@@ -5,7 +5,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 
 import com.fisher.wxtrend.R;
 import com.fisher.wxtrend.ui.BadgeView;
+import com.fisher.wxtrend.util.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -256,10 +256,7 @@ public class GridViewSortAdapter extends BaseAdapter implements View.OnClickList
         holder.title.setText(mTypeTitle.get(position));
 
         if(showBadgeView){
-            holder.closeBtn = new BadgeView(mContext);
-            holder.closeBtn.setBadgeCount(2);
-            holder.closeBtn.setBadgeGravity(Gravity.LEFT|Gravity.TOP);
-            holder.closeBtn.setBadgeMargin(-3,-3,0,0);
+            holder.closeBtn = ViewUtil.createBadgeView(mContext,holder.title);
             holder.closeBtn.setTargetView(holder.title);
             holder.closeBtn.setTag(position);
             holder.closeBtn.setOnClickListener(this);

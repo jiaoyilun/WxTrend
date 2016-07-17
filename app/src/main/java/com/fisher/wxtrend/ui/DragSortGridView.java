@@ -70,6 +70,7 @@ public class DragSortGridView extends GridView implements AdapterView.OnItemLong
         // 至少有两个item的时候，才有排序
         if (getChildCount() >= 2)
         {
+
             ((GridViewSortAdapter) getAdapter()).showBadgeView();
 
             Log.d(TAG,"e");
