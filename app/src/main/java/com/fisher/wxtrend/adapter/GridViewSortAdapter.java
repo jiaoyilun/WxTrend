@@ -248,6 +248,13 @@ public class GridViewSortAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
         holder.title.setText(mTypeTitle.get(position));
+
+       /* BadgeView badgeView = new BadgeView(mContext);
+        badgeView.setBadgeCount(2);
+        badgeView.setBadgeGravity(Gravity.LEFT|Gravity.TOP);
+        badgeView.setBadgeMargin(-3,-3,0,0);
+        badgeView.setTargetView(holder.title);*/
+
         if (mStartHideItemPosition == position)
         {
             convertView.setVisibility(View.INVISIBLE);
@@ -263,4 +270,6 @@ public class GridViewSortAdapter extends BaseAdapter
     {
         public TextView title;
     }
+
+
 }
