@@ -45,9 +45,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         initUI();
 
-        fragPagerAdapter = new TabAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(fragPagerAdapter);
-        mPageIndicator.setViewPager(mViewPager, 0);
+
     }
 
     @Override
@@ -60,8 +58,12 @@ public class MainActivity extends BaseActivity {
         pageLayout = (RelativeLayout) findViewById(R.id.layout_page);
         mPageIndicator = (TabPageIndicator) findViewById(R.id.page_indicator);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
-        typeOpenBtn = (ImageView) findViewById(R.id.btn_open);
 
+        fragPagerAdapter = new TabAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(fragPagerAdapter);
+        mPageIndicator.setViewPager(mViewPager, 0);
+
+        typeOpenBtn = (ImageView) findViewById(R.id.btn_open);
         typeOpenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,14 +72,13 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void showTypePopWin(){
-        if(typePopWin == null){
-            View popWinlayout = LayoutInflater.from(this).inflate(
-                    R.layout.layout_type, null);
+    private void showTypePopWin() {
+        if (typePopWin == null) {
+            View popWinlayout = LayoutInflater.from(this).inflate(R.layout.layout_type, null);
 
             int width = mViewPager.getWidth();
             int height = pageLayout.getHeight();
-            typePopWin = new PopupWindow(popWinlayout,width,height);
+            typePopWin = new PopupWindow(popWinlayout, width, height);
 
             mGridView = (DragSortGridView) popWinlayout.findViewById(R.id.activity_grid_view_sort_main);
 
@@ -106,15 +107,15 @@ public class MainActivity extends BaseActivity {
         };
         HttpMethods.getInstance().getWxArticleType(new ProgressSubscriber(getDataOnNext, MainActivity.this));
 
-        typePopWin.showAtLocation(mViewPager, Gravity.BOTTOM,0,0);
+        typePopWin.showAtLocation(mViewPager, Gravity.BOTTOM, 0, 0);
     }
 
 
     @Override
     public void onBackPressed() {
-        if(null != typePopWin && typePopWin.isShowing()){
+        if (null != typePopWin && typePopWin.isShowing()) {
             typePopWin.dismiss();
-        }else{
+        } else {
             super.onBackPressed();
         }
     }

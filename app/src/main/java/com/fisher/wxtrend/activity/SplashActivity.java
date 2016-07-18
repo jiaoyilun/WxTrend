@@ -55,6 +55,7 @@ public class SplashActivity extends Activity {
 
     private void redirectTo() {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//        startActivity(new Intent(getApplicationContext(), Main2Activity.class));
         finish();
     }
 }
