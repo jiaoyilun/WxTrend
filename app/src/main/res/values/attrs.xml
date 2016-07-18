@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="containerBackground" format="reference|color"></attr>
-
+    <attr name="textColor" format="reference|color"></attr>
     <declare-styleable name="ArticleTypeView">
         <attr name="showIcon" format="boolean"/>
     </declare-styleable>
