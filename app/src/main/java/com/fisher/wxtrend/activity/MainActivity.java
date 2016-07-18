@@ -2,7 +2,6 @@ package com.fisher.wxtrend.activity;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
@@ -26,7 +25,7 @@ import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.List;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends BaseActivity {
     private TabPageIndicator mPageIndicator;
     private ViewPager mViewPager;
     private FragmentPagerAdapter fragPagerAdapter;

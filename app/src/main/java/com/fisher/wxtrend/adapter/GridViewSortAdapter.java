@@ -240,7 +240,6 @@ public class GridViewSortAdapter extends BaseAdapter implements View.OnClickList
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        Log.d(TAG,"getView~~~~~");
         ViewHolder holder = null;
         if (convertView == null)
         {
