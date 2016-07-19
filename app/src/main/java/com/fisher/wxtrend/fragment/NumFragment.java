@@ -14,10 +14,5 @@ public class NumFragment extends BaseFragment {
         return R.layout.fragment_num;
     }
 
-    @Override
-    public void bindData() {
-
-    }
-
 
 }

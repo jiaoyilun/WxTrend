@@ -2,6 +2,7 @@ package com.fisher.wxtrend.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,13 +44,13 @@ public class ArticleListFragment extends BaseFragment implements SwipeRefreshLay
 
     @Override
     protected int getLayoutId() {
-        LogUtil.e(this,"ArticleListFragment------getLayoutId");
-
         return R.layout.fragment_article_list;
     }
 
     @Override
-    public void bindData() {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         mLayoutManager = new LinearLayoutManager(getActivity());
 
         articleListView = findViewById(R.id.view_list_article);

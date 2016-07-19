@@ -20,20 +20,6 @@ public abstract class BaseFragment extends Fragment {
     protected abstract int getLayoutId();
 
     /**
-     * 载入数据
-     */
-    public abstract void bindData();
-
-    /**
-     * 通知此页面做些事情
-     *
-     * @param actionCode
-     * @param arg        参数
-     */
-    public void doAction(String actionCode, Object arg) {
-    }
-
-    /**
      * 找到元素
      *
      * @param id
@@ -45,18 +31,11 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
-    public final View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                   Bundle savedInstanceState) {
+    public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mFragmentViewObject == null) {
             mFragmentViewObject = inflater.inflate(getLayoutId(), container, false);
         }
         return mFragmentViewObject;
-    }
-
-    @Override
-    public final void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        bindData();
     }
 
     @Override

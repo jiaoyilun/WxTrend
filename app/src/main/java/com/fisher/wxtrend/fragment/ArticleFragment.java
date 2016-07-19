@@ -1,6 +1,8 @@
 package com.fisher.wxtrend.fragment;
 
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
@@ -47,8 +49,11 @@ public class ArticleFragment extends BaseFragment {
         return R.layout.layout_tabpage;
     }
 
+
     @Override
-    public void bindData() {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         initView();
     }
 
