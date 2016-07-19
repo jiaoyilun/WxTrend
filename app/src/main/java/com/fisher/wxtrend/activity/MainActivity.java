@@ -1,46 +1,35 @@
 package com.fisher.wxtrend.activity;
 
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.support.v4.app.Fragment;
 import android.view.Menu;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 
 import com.fisher.wxtrend.R;
-import com.fisher.wxtrend.adapter.GridViewSortAdapter;
-import com.fisher.wxtrend.adapter.TabAdapter;
-import com.fisher.wxtrend.http.HttpMethods;
-import com.fisher.wxtrend.po.WxType;
-import com.fisher.wxtrend.subscribers.ProgressSubscriber;
-import com.fisher.wxtrend.subscribers.SubscriberOnNextListener;
-import com.fisher.wxtrend.ui.DragSortGridView;
+import com.fisher.wxtrend.base.BaseActivity;
+import com.fisher.wxtrend.fragment.ArticleFragment;
+import com.fisher.wxtrend.fragment.NumFragment;
 import com.fisher.wxtrend.ui.TabActionBarView;
-import com.fisher.wxtrend.util.DataUtil;
-import com.viewpagerindicator.TabPageIndicator;
-
-import java.util.List;
 
 public class MainActivity extends BaseActivity implements TabActionBarView.ITabActionCallback {
-    private TabPageIndicator mPageIndicator;
+  /*  private TabPageIndicator mPageIndicator;
     private ViewPager mViewPager;
     private FragmentPagerAdapter fragPagerAdapter;
-    private RelativeLayout pageLayout;
+    private RelativeLayout pageLayout;*/
 
     private TabActionBarView tabActionBarView;
 
-    private ImageView typeOpenBtn;
+    private Fragment currentFragment;
+
+    private int resId = R.id.fragment_tab_content;
+
+   /* private ImageView typeOpenBtn;
     private ImageView typeCloseBtn;
 
     private PopupWindow typePopWin;
     private DragSortGridView mGridView;
     private GridViewSortAdapter mAdapter;
-    private List<WxType> typeList;
+    private List<WxType> typeList;*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +50,8 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
         tabActionBarView = (TabActionBarView) findViewById(R.id.tabActionBar);
         initTabView(tabActionBarView, this);
 
-        pageLayout = (RelativeLayout) findViewById(R.id.layout_page);
+
+      /*  pageLayout = (RelativeLayout) findViewById(R.id.layout_page);
         mPageIndicator = (TabPageIndicator) findViewById(R.id.page_indicator);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
@@ -85,10 +75,10 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
             }
         };
 
-        HttpMethods.getInstance().getWxArticleType(new ProgressSubscriber(getDataOnNext, MainActivity.this));
+        HttpMethods.getInstance().getWxArticleType(new ProgressSubscriber(getDataOnNext, MainActivity.this));*/
     }
 
-    private void showTypePopWin() {
+   /* private void showTypePopWin() {
         if (typePopWin == null) {
             View popWinlayout = LayoutInflater.from(this).inflate(R.layout.layout_popup_type, null);
 
@@ -114,21 +104,23 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
         }
 
         typePopWin.showAtLocation(mViewPager, Gravity.BOTTOM, 0, 0);
-    }
+    }*/
 
 
     @Override
     public void onBackPressed() {
-        if (null != typePopWin && typePopWin.isShowing()) {
+       /* if (null != typePopWin && typePopWin.isShowing()) {
             typePopWin.dismiss();
         } else {
             super.onBackPressed();
-        }
+        }*/
     }
 
     @Override
     public void onLeftTabClick() {
-
+        ArticleFragment articleFragment = new ArticleFragment();
+        switchFragment(currentFragment, articleFragment, resId);
+        currentFragment = articleFragment;
     }
 
     @Override
@@ -138,7 +130,9 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
 
     @Override
     public void onRightClick() {
-
+        NumFragment numFragment = new NumFragment();
+        switchFragment(currentFragment, numFragment, resId);
+        currentFragment = numFragment;
     }
 }
 

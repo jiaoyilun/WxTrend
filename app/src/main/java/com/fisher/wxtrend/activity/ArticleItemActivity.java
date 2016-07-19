@@ -3,6 +3,7 @@ package com.fisher.wxtrend.activity;
 import android.os.Bundle;
 
 import com.fisher.wxtrend.R;
+import com.fisher.wxtrend.base.BaseActivity;
 import com.fisher.wxtrend.ui.ProgressWebView;
 
 /**

@@ -3,8 +3,8 @@
 
     <TextView
         android:id="@+id/action_tab_left"
-        style="@style/style_tab"
-        android:background="@drawable/tab_left_normal"
+        style="@style/style_tab_selected"
+        android:background="@drawable/tab_left_select"
         />
 
     <TextView

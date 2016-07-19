@@ -2,18 +2,15 @@ package com.fisher.wxtrend.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.fisher.wxtrend.R;
 import com.fisher.wxtrend.activity.ArticleItemActivity;
 import com.fisher.wxtrend.adapter.ArticleListAdapter;
+import com.fisher.wxtrend.base.BaseFragment;
 import com.fisher.wxtrend.http.HttpMethods;
 import com.fisher.wxtrend.po.PageData;
 import com.fisher.wxtrend.po.WxArticle;
@@ -30,9 +27,8 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/7/14/.
  */
-public class ArticleListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ArticleListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private View root;
     private RecyclerView articleListView;
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -45,12 +41,20 @@ public class ArticleListFragment extends Fragment implements SwipeRefreshLayout.
 
     private String currentTypeId;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_article_list, container, false);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        return root;
+    protected int getLayoutId() {
+        return R.layout.fragment_article_list;
+    }
+
+    @Override
+    public void bindData() {
+
+
+        articleListView = findViewById(R.id.view_list_article);
+        articleListView.setLayoutManager(mLayoutManager);
+
+        initSwipeRefreshView();
+        loadData(true);
     }
 
     @Override
@@ -82,25 +86,13 @@ public class ArticleListFragment extends Fragment implements SwipeRefreshLayout.
                         startActivity(intent);
                     }
                 });
-
             }
         };
-
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        articleListView = (RecyclerView) root.findViewById(R.id.view_list_article);
-        articleListView.setLayoutManager(mLayoutManager);
-
-        initSwipeRefreshView();
-        loadData(true);
-
-    }
 
     private void initSwipeRefreshView() {
-        swipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.id_swipe_ly);
+        swipeRefreshLayout = findViewById(R.id.id_swipe_ly);
         swipeRefreshLayout.setOnRefreshListener(this);
         // 设置下拉圆圈上的颜色，蓝色、绿色、橙色、红色
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
