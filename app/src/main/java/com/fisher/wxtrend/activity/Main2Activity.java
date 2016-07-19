@@ -13,7 +13,7 @@ public class Main2Activity extends BaseActivity implements TabActionBarView.ITab
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main);
 
         tabActionBarView = (TabActionBarView) findViewById(R.id.tabActionBar);
         tabActionBarView.bindTab(this, "热门文章", "热门公号");
