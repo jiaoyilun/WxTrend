@@ -16,12 +16,17 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
 
     private Fragment currentFragment;
 
+    private ArticleFragment articleFragment;
+
+    private NumFragment numFragment;
+
     private int resId = R.id.fragment_tab_content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initUI();
     }
 
@@ -48,7 +53,9 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
 
     @Override
     public void onLeftTabClick() {
-        ArticleFragment articleFragment = new ArticleFragment();
+        if (articleFragment == null) {
+            articleFragment = new ArticleFragment();
+        }
         switchFragment(currentFragment, articleFragment, resId);
         currentFragment = articleFragment;
     }
@@ -60,7 +67,9 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
 
     @Override
     public void onRightClick() {
-        NumFragment numFragment = new NumFragment();
+        if (numFragment == null) {
+            numFragment = new NumFragment();
+        }
         switchFragment(currentFragment, numFragment, resId);
         currentFragment = numFragment;
     }
