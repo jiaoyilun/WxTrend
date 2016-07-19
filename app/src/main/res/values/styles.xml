@@ -1,9 +1,7 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/white_dark</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -11,11 +9,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-
-    <style name="MyTheme" parent="AppTheme.NoActionBar">
+    <style name="MyTheme" parent="AppTheme">
         <item name="vpiTabPageIndicatorStyle">@style/MyWidget.TabPageIndicator</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:animationDuration">5000</item>
@@ -39,7 +33,7 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="PopupAnimation" parent="android:Animation" mce_bogus="1">
+    <style name="PopupAnimation" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@animator/popup_enter</item>
         <item name="android:windowExitAnimation">@animator/popup_exit</item>
     </style>
@@ -49,6 +43,20 @@
         <item name="android:textColor">?textColor</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="title_bar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/md_title_bar_height</item>
+        <item name="android:background">@color/gray_darker</item>
+    </style>
+
+    <style name="title_bar_button">
+        <item name="android:layout_width">@dimen/md_title_bar_height</item>
+        <item name="android:layout_height">@dimen/md_title_bar_height</item>
+        <item name="android:background">@drawable/transparent_gray_circle_selector</item>
+        <item name="android:padding">13dp</item>
+        <item name="android:scaleType">fitXY</item>
     </style>
 
 </resources>

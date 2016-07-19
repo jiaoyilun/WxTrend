@@ -20,16 +20,19 @@ import com.fisher.wxtrend.po.WxType;
 import com.fisher.wxtrend.subscribers.ProgressSubscriber;
 import com.fisher.wxtrend.subscribers.SubscriberOnNextListener;
 import com.fisher.wxtrend.ui.DragSortGridView;
+import com.fisher.wxtrend.ui.TabActionBarView;
 import com.fisher.wxtrend.util.DataUtil;
 import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements TabActionBarView.ITabActionCallback {
     private TabPageIndicator mPageIndicator;
     private ViewPager mViewPager;
     private FragmentPagerAdapter fragPagerAdapter;
     private RelativeLayout pageLayout;
+
+    private TabActionBarView tabActionBarView;
 
     private ImageView typeOpenBtn;
     private ImageView typeCloseBtn;
@@ -42,7 +45,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
         initUI();
 
 
@@ -55,6 +58,9 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initUI() {
+        tabActionBarView = (TabActionBarView) findViewById(R.id.tabActionBar);
+        initTabView(tabActionBarView, this);
+
         pageLayout = (RelativeLayout) findViewById(R.id.layout_page);
         mPageIndicator = (TabPageIndicator) findViewById(R.id.page_indicator);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -118,6 +124,21 @@ public class MainActivity extends BaseActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onLeftTabClick() {
+
+    }
+
+    @Override
+    public void onMiddleTabClick() {
+
+    }
+
+    @Override
+    public void onRightClick() {
+
     }
 }
 

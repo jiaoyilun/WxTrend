@@ -39,7 +39,7 @@ public class TabActionBarView extends LinearLayout implements View.OnClickListen
     public TabActionBarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        mTextNormalColor = context.getResources().getColor(R.color.dark);
+        mTextNormalColor = context.getResources().getColor(R.color.white);
         mTextSelectedColor = context.getResources().getColor(R.color.green_dark);
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
@@ -56,20 +56,16 @@ public class TabActionBarView extends LinearLayout implements View.OnClickListen
 
     public void bindTab(ITabActionCallback callback, String leftText, String middleText, String rightText) {
         mCallback = callback;
-        mLeftTextView.setTextColor(mTextNormalColor);
         mLeftTextView.setText(leftText);
         mLeftTextView.setOnClickListener(this);
 
-        mRightTextView.setTextColor(mTextNormalColor);
         mRightTextView.setText(rightText);
         mRightTextView.setOnClickListener(this);
 
-
-        if (TextUtils.isEmpty(middleText)) {
+        if (TextUtils.isEmpty(middleText))
             mMiddleTextView.setVisibility(View.GONE);
-        } else {
+        else {
             mMiddleTextView.setVisibility(View.VISIBLE);
-            mMiddleTextView.setTextColor(mTextNormalColor);
             mMiddleTextView.setText(middleText);
             mMiddleTextView.setOnClickListener(this);
         }
@@ -108,15 +104,15 @@ public class TabActionBarView extends LinearLayout implements View.OnClickListen
 
             case LEFT_TAB_INDEX:
                 mLeftTextView.setBackgroundResource(R.drawable.tab_left_normal);
-
+                mLeftTextView.setTextColor(mTextNormalColor);
                 break;
             case MIDDLE_TAB_INDEX:
                 mMiddleTextView.setBackgroundResource(R.drawable.tab_middle_normal);
-
+                mMiddleTextView.setTextColor(mTextNormalColor);
                 break;
             case RIGHT_TAB_INDEX:
                 mRightTextView.setBackgroundResource(R.drawable.tab_right_normal);
-
+                mRightTextView.setTextColor(mTextNormalColor);
                 break;
         }
     }
@@ -156,3 +152,4 @@ public class TabActionBarView extends LinearLayout implements View.OnClickListen
         void onRightClick();
     }
 }
+

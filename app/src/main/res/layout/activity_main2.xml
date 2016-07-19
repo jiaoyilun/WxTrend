@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/com.fisher.wxtrend.ui"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.fisher.wxtrend.activity.Main2Activity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <com.fisher.wxtrend.ui.TabActionBarView
-        android:id="@+id/tabActionBar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        style="@style/title_bar">
 
+        <ImageButton
+            android:id="@+id/title_left_image"
+            style="@style/title_bar_button"
+            android:padding="17dp"
+            android:src="@mipmap/ic_launcher"
+            />
 
-    </com.fisher.wxtrend.ui.TabActionBarView>
+        <com.fisher.wxtrend.ui.TabActionBarView
+            android:id="@+id/tabActionBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
 
-
-</RelativeLayout>
+    <include layout="@layout/activity_main"/>
+</LinearLayout>

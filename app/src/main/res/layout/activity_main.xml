@@ -1,59 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+
+<!--  <android.support.design.widget.AppBarLayout
+      android:id="@+id/appbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <android.support.v7.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="?attr/actionBarSize"
+          android:background="?attr/colorPrimary"
+          app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+  </android.support.design.widget.AppBarLayout>-->
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <com.viewpagerindicator.TabPageIndicator
+        android:id="@+id/page_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/graybg"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+    <ImageView
+        android:id="@+id/btn_open"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="right"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="-2dp"
+        android:background="@color/graybg"
+        android:clickable="true"
+        android:src="@drawable/act_down"
+        />
 
-    </android.support.design.widget.AppBarLayout>
-
-    <RelativeLayout
-        android:id="@+id/layout_page"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".activity.MainActivity">
-
-        <com.viewpagerindicator.TabPageIndicator
-            android:id="@+id/page_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/graybg"/>
-
-        <ImageView
-            android:id="@+id/btn_open"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="right"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="-2dp"
-            android:background="@color/graybg"
-            android:clickable="true"
-            android:src="@drawable/act_down"
-            />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/page_indicator"
-            />
-    </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+        android:layout_below="@id/page_indicator"
+        />
+</RelativeLayout>
