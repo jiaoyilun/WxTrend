@@ -28,8 +28,6 @@
             android:theme="@style/MyTheme">
         </activity>
         <activity android:name=".activity.ArticleItemActivity"/>
-        <activity android:name=".activity.Main2Activity">
-        </activity>
     </application>
 
 </manifest>
