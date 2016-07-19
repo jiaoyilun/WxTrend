@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.fisher.wxtrend.ui.BadgeView;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -14,16 +15,16 @@ import com.squareup.picasso.Picasso;
 public class ViewUtil {
 
     public static final void displayImg(Context context, String url, ImageView destView) {
-        Picasso.with(context).load(url).resize(120, 100).centerCrop().into(destView);
+        Picasso.with(context).load(url).resize(120, 100).centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(destView);
     }
 
-    public static final BadgeView createBadgeView(Context context, View targetView){
+    public static final BadgeView createBadgeView(Context context, View targetView) {
         BadgeView badgeView = new BadgeView(context);
         badgeView.setBadgeCount(2);
-        badgeView.setBadgeGravity(Gravity.LEFT|Gravity.TOP);
-        badgeView.setBadgeMargin(-3,-3,0,0);
+        badgeView.setBadgeGravity(Gravity.LEFT | Gravity.TOP);
+        badgeView.setBadgeMargin(-3, -3, 0, 0);
         badgeView.setTargetView(targetView);
-        return  badgeView;
+        return badgeView;
     }
 
 }
