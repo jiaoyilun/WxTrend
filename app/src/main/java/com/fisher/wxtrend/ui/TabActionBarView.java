@@ -121,6 +121,7 @@ public class TabActionBarView extends LinearLayout implements View.OnClickListen
         cleanPreviousStyle();
         mLeftTextView.setBackgroundResource(R.drawable.tab_left_select);
         mLeftTextView.setTextColor(mTextSelectedColor);
+
         mCallback.onLeftTabClick();
 
         mSelectTabIndex = LEFT_TAB_INDEX;
