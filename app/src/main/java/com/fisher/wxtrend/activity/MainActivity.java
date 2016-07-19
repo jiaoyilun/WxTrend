@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
 
     private void showTypePopWin() {
         if (typePopWin == null) {
-            View popWinlayout = LayoutInflater.from(this).inflate(R.layout.layout_type, null);
+            View popWinlayout = LayoutInflater.from(this).inflate(R.layout.layout_popup_type, null);
 
             int width = mViewPager.getWidth();
             int height = pageLayout.getHeight();
