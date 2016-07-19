@@ -25,6 +25,7 @@
 
     <FrameLayout
         android:id="@+id/fragment_tab_content"
+        android:name="com.fisher.wxtrend.fragment.ArticleFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </FrameLayout>
