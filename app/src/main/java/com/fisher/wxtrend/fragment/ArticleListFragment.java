@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,7 @@ import com.fisher.wxtrend.po.WxArticle;
 import com.fisher.wxtrend.subscribers.ProgressSubscriber;
 import com.fisher.wxtrend.subscribers.SubscriberOnNextListener;
 import com.fisher.wxtrend.util.DataUtil;
+import com.fisher.wxtrend.util.LogUtil;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
@@ -31,7 +31,6 @@ import java.util.List;
  * Created by Administrator on 2016/7/14/.
  */
 public class ArticleListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String TAG = "ArticleListFragment";
 
     private View root;
     private RecyclerView articleListView;
@@ -44,6 +43,8 @@ public class ArticleListFragment extends Fragment implements SwipeRefreshLayout.
 
     private LinearLayoutManager mLayoutManager;
 
+    private String currentTypeId;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +56,8 @@ public class ArticleListFragment extends Fragment implements SwipeRefreshLayout.
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        currentTypeId = getArguments().getString("TYPEID");
         totalList = new ArrayList<>();
         getDataOnNext = new SubscriberOnNextListener<PageData<LinkedTreeMap>>() {
             @Override
@@ -119,8 +122,8 @@ public class ArticleListFragment extends Fragment implements SwipeRefreshLayout.
         } else {
             pageNum = ++pageNum;
         }
-        Log.d(TAG, pageNum + "");
-        HttpMethods.getInstance().getWxArticleList(new ProgressSubscriber(getDataOnNext, getActivity()), "", "", "", String.valueOf(pageNum));
+        LogUtil.e(this, pageNum + "");
+        HttpMethods.getInstance().getWxArticleList(new ProgressSubscriber(getDataOnNext, getActivity()), currentTypeId, "", "", String.valueOf(pageNum));
     }
 
     private RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
@@ -143,6 +146,5 @@ public class ArticleListFragment extends Fragment implements SwipeRefreshLayout.
             }
         }
     };
-
 
 }

@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity {
     private PopupWindow typePopWin;
     private DragSortGridView mGridView;
     private GridViewSortAdapter mAdapter;
-    private List<String> titles;
+    private List<WxType> typeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,17 +59,27 @@ public class MainActivity extends BaseActivity {
         mPageIndicator = (TabPageIndicator) findViewById(R.id.page_indicator);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
-        fragPagerAdapter = new TabAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(fragPagerAdapter);
-        mPageIndicator.setViewPager(mViewPager, 0);
-
-        typeOpenBtn = (ImageView) findViewById(R.id.btn_open);
-        typeOpenBtn.setOnClickListener(new View.OnClickListener() {
+        SubscriberOnNextListener getDataOnNext = new SubscriberOnNextListener<List<WxType>>() {
             @Override
-            public void onClick(View v) {
-                showTypePopWin();
+            public void onNext(List<WxType> dataList) {
+                typeList = dataList;
+
+                fragPagerAdapter = new TabAdapter(getSupportFragmentManager(), typeList);
+                mViewPager.setAdapter(fragPagerAdapter);
+                mPageIndicator.setViewPager(mViewPager, 0);
+
+                typeOpenBtn = (ImageView) findViewById(R.id.btn_open);
+                typeOpenBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showTypePopWin();
+                    }
+                });
+
             }
-        });
+        };
+
+        HttpMethods.getInstance().getWxArticleType(new ProgressSubscriber(getDataOnNext, MainActivity.this));
     }
 
     private void showTypePopWin() {
@@ -81,6 +91,8 @@ public class MainActivity extends BaseActivity {
             typePopWin = new PopupWindow(popWinlayout, width, height);
 
             mGridView = (DragSortGridView) popWinlayout.findViewById(R.id.activity_grid_view_sort_main);
+            mAdapter = new GridViewSortAdapter(mGridView, MainActivity.this, DataUtil.convertTypeToStr(typeList));
+            mGridView.setAdapter(mAdapter);
 
             ColorDrawable dw = new ColorDrawable(0xFFFFFFFF);
             typePopWin.setBackgroundDrawable(dw);
@@ -94,18 +106,6 @@ public class MainActivity extends BaseActivity {
                 }
             });
         }
-
-        SubscriberOnNextListener getDataOnNext = new SubscriberOnNextListener<List<WxType>>() {
-            @Override
-            public void onNext(List<WxType> dataList) {
-                titles = DataUtil.convertTypeToStr(dataList);
-
-                mAdapter = new GridViewSortAdapter(mGridView, MainActivity.this, titles);
-                mGridView.setAdapter(mAdapter);
-
-            }
-        };
-        HttpMethods.getInstance().getWxArticleType(new ProgressSubscriber(getDataOnNext, MainActivity.this));
 
         typePopWin.showAtLocation(mViewPager, Gravity.BOTTOM, 0, 0);
     }
