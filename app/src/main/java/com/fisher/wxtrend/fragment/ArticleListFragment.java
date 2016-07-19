@@ -43,12 +43,14 @@ public class ArticleListFragment extends BaseFragment implements SwipeRefreshLay
 
     @Override
     protected int getLayoutId() {
+        LogUtil.e(this,"ArticleListFragment------getLayoutId");
+
         return R.layout.fragment_article_list;
     }
 
     @Override
     public void bindData() {
-
+        mLayoutManager = new LinearLayoutManager(getActivity());
 
         articleListView = findViewById(R.id.view_list_article);
         articleListView.setLayoutManager(mLayoutManager);

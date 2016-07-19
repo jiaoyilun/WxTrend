@@ -20,6 +20,7 @@ import com.fisher.wxtrend.subscribers.ProgressSubscriber;
 import com.fisher.wxtrend.subscribers.SubscriberOnNextListener;
 import com.fisher.wxtrend.ui.DragSortGridView;
 import com.fisher.wxtrend.util.DataUtil;
+import com.fisher.wxtrend.util.LogUtil;
 import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.List;
@@ -52,20 +53,22 @@ public class ArticleFragment extends BaseFragment {
     }
 
     public void initView() {
-        pageLayout = (RelativeLayout) findViewById(R.id.layout_page);
-        mPageIndicator = (TabPageIndicator) findViewById(R.id.page_indicator);
-        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        pageLayout = findViewById(R.id.layout_page);
+        mPageIndicator = findViewById(R.id.page_indicator);
+        mViewPager = findViewById(R.id.view_pager);
 
         SubscriberOnNextListener getDataOnNext = new SubscriberOnNextListener<List<WxType>>() {
             @Override
             public void onNext(List<WxType> dataList) {
+                LogUtil.e(this, "onNext");
+
                 typeList = dataList;
 
                 fragPagerAdapter = new TabAdapter(getFragmentManager(), typeList);
                 mViewPager.setAdapter(fragPagerAdapter);
                 mPageIndicator.setViewPager(mViewPager, 0);
 
-                typeOpenBtn = (ImageView) findViewById(R.id.btn_open);
+                typeOpenBtn = findViewById(R.id.btn_open);
                 typeOpenBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

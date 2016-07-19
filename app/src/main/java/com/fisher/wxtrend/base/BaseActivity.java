@@ -23,7 +23,6 @@ public class BaseActivity extends AppCompatActivity {
         if (!to.isAdded()) {
             transaction.hide(from).add(resId, to).commit();
         } else {
-            // 隐藏当前的fragment，显示下一个
             transaction.hide(from).show(to).commit();
         }
     }

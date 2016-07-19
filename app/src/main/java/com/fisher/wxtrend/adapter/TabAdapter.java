@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.fisher.wxtrend.fragment.ArticleListFragment;
 import com.fisher.wxtrend.po.WxType;
+import com.fisher.wxtrend.util.LogUtil;
 
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class TabAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        LogUtil.e(this,"TabAdapter------getItem");
+
         ArticleListFragment fragment = new ArticleListFragment();
         Bundle b = new Bundle();
         WxType wxType = typeList.get(position);
