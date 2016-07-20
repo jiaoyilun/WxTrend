@@ -33,11 +33,11 @@ public class HttpMethods {
 
     private HttpMethods() {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
-        /*HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
-        httpClientBuilder.addInterceptor(logging);*/
 
+     /*   HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpClientBuilder.addInterceptor(logging);
+*/
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
 
         retrofit = new Retrofit.Builder().client(httpClientBuilder.build()).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).baseUrl(Constants.API_URL).build();

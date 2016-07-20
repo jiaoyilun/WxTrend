@@ -117,7 +117,7 @@ public class ArticleListFragment extends BaseFragment implements SwipeRefreshLay
         } else {
             pageNum = ++pageNum;
         }
-        LogUtil.e(this, pageNum + "");
+        LogUtil.e(this, "pageNum:" + pageNum + "--------------" + "typeID:" + currentTypeId);
         HttpMethods.getInstance().getWxArticleList(new ProgressSubscriber(getDataOnNext, getActivity()), currentTypeId, "", "", String.valueOf(pageNum));
     }
 
