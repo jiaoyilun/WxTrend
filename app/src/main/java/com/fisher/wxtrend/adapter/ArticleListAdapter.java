@@ -15,6 +15,9 @@ import com.fisher.wxtrend.util.ViewUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Administrator on 2016/7/14/.
  */
@@ -45,7 +48,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
         WxArticle article = articleList.get(position);
         holder.news_item_title.setText(article.getTitle());
         holder.news_item_date.setText(article.getDate());
-        ViewUtil.displayImg(context, article.getContentImg(), holder.news_item_icon,120,100);
+        ViewUtil.displayImg(context, article.getContentImg(), holder.news_item_icon, 120, 100);
 
         holder.itemView.setTag(article);
     }
@@ -63,15 +66,19 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
     }
 
     public class RecVH extends RecyclerView.ViewHolder {
+        @BindView(R.id.news_item_icon)
         ImageView news_item_icon;
+        @BindView(R.id.news_item_title)
         TextView news_item_title;
+        @BindView(R.id.news_item_date)
         TextView news_item_date;
 
         public RecVH(View itemView) {
             super(itemView);
-            news_item_icon = (ImageView) itemView.findViewById(R.id.news_item_icon);
+           /* news_item_icon = (ImageView) itemView.findViewById(R.id.news_item_icon);
             news_item_title = (TextView) itemView.findViewById(R.id.news_item_title);
-            news_item_date = (TextView) itemView.findViewById(R.id.news_item_date);
+            news_item_date = (TextView) itemView.findViewById(R.id.news_item_date);*/
+            ButterKnife.bind(this, itemView);
         }
     }
 
