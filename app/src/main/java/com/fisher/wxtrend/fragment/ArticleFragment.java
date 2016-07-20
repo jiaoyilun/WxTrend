@@ -90,27 +90,30 @@ public class ArticleFragment extends BaseFragment {
 
     private void showTypePopWin() {
         if (typePopWin == null) {
+            LogUtil.e(this, "popupWin init");
             View popWinlayout = LayoutInflater.from(getContext()).inflate(R.layout.layout_popup_type, null);
 
             int width = mViewPager.getWidth();
             int height = pageLayout.getHeight();
-            typePopWin = new PopupWindow(popWinlayout, width, height);
+            if (typePopWin == null) {
+                typePopWin = new PopupWindow(popWinlayout, width, height);
+                ColorDrawable dw = new ColorDrawable(0xFFFFFFFF);
+                typePopWin.setBackgroundDrawable(dw);
+                typePopWin.setAnimationStyle(R.style.PopupAnimation);
+
+                typeCloseBtn = (ImageView) popWinlayout.findViewById(R.id.btn_close);
+                typeCloseBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        typePopWin.dismiss();//PopUpWindow只有打开是才会触发
+                    }
+                });
+            }
 
             mGridView = (DragSortGridView) popWinlayout.findViewById(R.id.activity_grid_view_sort_main);
             mAdapter = new GridViewSortAdapter(mGridView, getContext(), DataUtil.convertTypeToStr(typeList));
             mGridView.setAdapter(mAdapter);
 
-            ColorDrawable dw = new ColorDrawable(0xFFFFFFFF);
-            typePopWin.setBackgroundDrawable(dw);
-            typePopWin.setAnimationStyle(R.style.PopupAnimation);
-
-            typeCloseBtn = (ImageView) popWinlayout.findViewById(R.id.btn_close);
-            typeCloseBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    typePopWin.dismiss();//PopUpWindow只有打开是才会触发
-                }
-            });
         }
 
         typePopWin.showAtLocation(mViewPager, Gravity.BOTTOM, 0, 0);

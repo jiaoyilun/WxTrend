@@ -9,6 +9,7 @@ import com.fisher.wxtrend.base.BaseActivity;
 import com.fisher.wxtrend.fragment.ArticleFragment;
 import com.fisher.wxtrend.fragment.NumFragment;
 import com.fisher.wxtrend.ui.TabActionBarView;
+import com.fisher.wxtrend.util.LogUtil;
 
 public class MainActivity extends BaseActivity implements TabActionBarView.ITabActionCallback {
 
@@ -55,10 +56,10 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
     @Override
     public void onLeftTabClick() {
         if (articleFragment == null) {
+            LogUtil.e(this,"left init~~~~");
             articleFragment = new ArticleFragment();
         }
-        switchFragment(currentFragment, articleFragment, resId);
-        currentFragment = articleFragment;
+        switchFragment(articleFragment);
     }
 
     @Override
@@ -69,16 +70,22 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
     @Override
     public void onRightClick() {
         if (numFragment == null) {
+            LogUtil.e(this,"right init~~~~");
             numFragment = new NumFragment();
         }
-        switchFragment(currentFragment, numFragment, resId);
-        currentFragment = numFragment;
+        switchFragment(numFragment);
     }
 
     private void initFragment() {
+        LogUtil.e(this,"init~~~~");
         articleFragment = new ArticleFragment();
-        switchFragment(currentFragment, articleFragment, resId);
-        currentFragment = articleFragment;
+        switchFragment(articleFragment);
+    }
+
+
+    private void switchFragment(Fragment fragment) {
+        super.switchFragment(currentFragment, fragment, resId);
+        currentFragment = fragment;
     }
 }
 
