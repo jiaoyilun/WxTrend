@@ -9,11 +9,14 @@ import com.fisher.wxtrend.base.BaseActivity;
 import com.fisher.wxtrend.fragment.ArticleFragment;
 import com.fisher.wxtrend.fragment.NumFragment;
 import com.fisher.wxtrend.ui.TabActionBarView;
-import com.fisher.wxtrend.util.LogUtil;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements TabActionBarView.ITabActionCallback {
 
-    private TabActionBarView tabActionBarView;
+    @BindView(R.id.tabActionBar)
+    TabActionBarView tabActionBarView;
 
     private Fragment currentFragment;
 
@@ -27,6 +30,7 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         initUI();
     }
@@ -38,7 +42,6 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
     }
 
     private void initUI() {
-        tabActionBarView = (TabActionBarView) findViewById(R.id.tabActionBar);
         initTabView(tabActionBarView, this);
         initFragment();
     }
@@ -56,7 +59,6 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
     @Override
     public void onLeftTabClick() {
         if (articleFragment == null) {
-            LogUtil.e(this,"left init~~~~");
             articleFragment = new ArticleFragment();
         }
         switchFragment(articleFragment);
@@ -70,14 +72,12 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
     @Override
     public void onRightClick() {
         if (numFragment == null) {
-            LogUtil.e(this,"right init~~~~");
             numFragment = new NumFragment();
         }
         switchFragment(numFragment);
     }
 
     private void initFragment() {
-        LogUtil.e(this,"init~~~~");
         articleFragment = new ArticleFragment();
         switchFragment(articleFragment);
     }
