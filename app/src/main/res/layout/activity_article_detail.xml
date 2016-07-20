@@ -58,7 +58,6 @@
                     android:layout_marginBottom="16dp"
                     android:padding="16dp"
                     android:textSize="22sp"
-                    tools:text="哈哈哈哈"
                     />
 
                 <TextView
@@ -70,16 +69,12 @@
                     android:textSize="13sp"
                     tools:text="图片来源"
                     />
-
-
             </FrameLayout>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar_detail"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
                 />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

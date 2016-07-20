@@ -1,6 +1,8 @@
 package com.fisher.wxtrend.activity;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,29 +27,39 @@ public class ArticleDetailActivity extends BaseActivity {
     TextView tv_title;
     @BindView(R.id.tv_source)
     TextView tv_source;
+    @BindView(R.id.toolbar_detail)
+    Toolbar mToolbar;
 
     private WxArticle article;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_article_item);
+        setContentView(R.layout.activity_article_detail);
         ButterKnife.bind(this);
 
         article = getIntent().getParcelableExtra("DATA");
+
+        mToolbar.setTitle("");
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//设置是否有返回箭头
+
 
         initView();
     }
 
     private void initView() {
-
         ViewUtil.displayImg(ArticleDetailActivity.this, article.getContentImg(), contentImg, 200, 188);
         tv_title.setText(article.getTitle());
         tv_source.setText(article.getUserName());
 
         mWebView.getSettings().setJavaScriptEnabled(false);
         mWebView.loadUrl(article.getUrl());
-
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_article_detail, menu);
+        return true;
+    }
 }

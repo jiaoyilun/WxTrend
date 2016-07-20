@@ -30,6 +30,9 @@ public class ProgressWebView extends WebView {
         // setWebViewClient(new WebViewClient(){});
         setWebChromeClient(new WebChromeClient());
         //是否可以缩放
+        if(isInEditMode()){
+            return;
+        }
         getSettings().setSupportZoom(true);
         getSettings().setBuiltInZoomControls(true); 
     }
