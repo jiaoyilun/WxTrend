@@ -44,7 +44,7 @@ public class TabActionBarView extends LinearLayout implements View.OnClickListen
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
 
-        View view = LayoutInflater.from(context).inflate(R.layout.action_item_tab, this, true);
+        View view = LayoutInflater.from(context).inflate(R.layout.view_tab_actionbar, this, true);
         mLeftTextView = (TextView) view.findViewById(R.id.action_tab_left);
         mMiddleTextView = (TextView) view.findViewById(R.id.action_tab_middle);
         mRightTextView = (TextView) view.findViewById(R.id.action_tab_right);
@@ -100,21 +100,12 @@ public class TabActionBarView extends LinearLayout implements View.OnClickListen
     }
 
     void cleanPreviousStyle() {
-        switch (mSelectTabIndex) {
-
-            case LEFT_TAB_INDEX:
-                mLeftTextView.setBackgroundResource(R.drawable.tab_left_normal);
-                mLeftTextView.setTextColor(mTextNormalColor);
-                break;
-            case MIDDLE_TAB_INDEX:
-                mMiddleTextView.setBackgroundResource(R.drawable.tab_middle_normal);
-                mMiddleTextView.setTextColor(mTextNormalColor);
-                break;
-            case RIGHT_TAB_INDEX:
-                mRightTextView.setBackgroundResource(R.drawable.tab_right_normal);
-                mRightTextView.setTextColor(mTextNormalColor);
-                break;
-        }
+        mLeftTextView.setBackgroundResource(R.drawable.tab_left_normal);
+        mLeftTextView.setTextColor(mTextNormalColor);
+        mMiddleTextView.setBackgroundResource(R.drawable.tab_middle_normal);
+        mMiddleTextView.setTextColor(mTextNormalColor);
+        mRightTextView.setBackgroundResource(R.drawable.tab_right_normal);
+        mRightTextView.setTextColor(mTextNormalColor);
     }
 
     public void leftClick() {
