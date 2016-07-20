@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
     private void initUI() {
         tabActionBarView = (TabActionBarView) findViewById(R.id.tabActionBar);
         initTabView(tabActionBarView, this);
+        initFragment();
     }
 
 
@@ -73,5 +74,12 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
         switchFragment(currentFragment, numFragment, resId);
         currentFragment = numFragment;
     }
+
+    private void initFragment() {
+        articleFragment = new ArticleFragment();
+        switchFragment(currentFragment, articleFragment, resId);
+        currentFragment = articleFragment;
+    }
+
 }
 

@@ -18,9 +18,14 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void switchFragment(Fragment from, Fragment to, int resId) {
-        if (from == null || to == null)
+        if (to == null)
             return;
-        FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (from == null) {//初始化,no hide
+            LogUtil.e(this, "init~~~~~~~~~~");
+            transaction.add(resId, to).commit();
+            return;
+        }
         if (!to.isAdded()) {
             LogUtil.e(this, "switch~~~~add");
             transaction.hide(from).add(resId, to).commit();
