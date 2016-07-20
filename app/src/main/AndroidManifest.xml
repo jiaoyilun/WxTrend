@@ -27,7 +27,7 @@
             android:label="@string/app_name"
             android:theme="@style/MyTheme">
         </activity>
-        <activity android:name=".activity.ArticleItemActivity"/>
+        <activity android:name=".activity.ArticleDetailActivity"/>
     </application>
 
 </manifest>

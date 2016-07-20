@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.fisher.wxtrend.R;
-import com.fisher.wxtrend.activity.ArticleItemActivity;
+import com.fisher.wxtrend.activity.ArticleDetailActivity;
 import com.fisher.wxtrend.adapter.ArticleListAdapter;
 import com.fisher.wxtrend.base.BaseFragment;
 import com.fisher.wxtrend.http.HttpMethods;
@@ -84,8 +84,10 @@ public class ArticleListFragment extends BaseFragment implements SwipeRefreshLay
                     @Override
                     public void onItemClick(View view, Object obj) {
                         Intent intent = new Intent();
-                        intent.putExtra("url", String.valueOf(obj));
-                        intent.setClass(getActivity(), ArticleItemActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("DATA", (WxArticle) obj);
+                        intent.putExtras(bundle);
+                        intent.setClass(getActivity(), ArticleDetailActivity.class);
                         startActivity(intent);
                     }
                 });

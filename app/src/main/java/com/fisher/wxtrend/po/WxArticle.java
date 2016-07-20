@@ -1,5 +1,7 @@
 package com.fisher.wxtrend.po;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by Administrator on 2016/7/14/.
  */
-public class WxArticle {
+public class WxArticle implements Parcelable {
 
     /**
      * contentImg : http://app1.showapi.com/weixin_info/article/0df9ffd5-c70c-4c35-bf1a-c16b7de5acdb.jpg
@@ -87,4 +89,45 @@ public class WxArticle {
     public String getUserName() { return userName;}
 
     public void setUserName(String userName) { this.userName = userName;}
+
+
+    @Override
+    public int describeContents() { return 0; }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.contentImg);
+        dest.writeString(this.date);
+        dest.writeString(this.id);
+        dest.writeString(this.title);
+        dest.writeString(this.typeId);
+        dest.writeString(this.typeName);
+        dest.writeString(this.url);
+        dest.writeString(this.userLogo);
+        dest.writeString(this.userLogo_code);
+        dest.writeString(this.userName);
+    }
+
+    public WxArticle() {}
+
+    protected WxArticle(Parcel in) {
+        this.contentImg = in.readString();
+        this.date = in.readString();
+        this.id = in.readString();
+        this.title = in.readString();
+        this.typeId = in.readString();
+        this.typeName = in.readString();
+        this.url = in.readString();
+        this.userLogo = in.readString();
+        this.userLogo_code = in.readString();
+        this.userName = in.readString();
+    }
+
+    public static final Parcelable.Creator<WxArticle> CREATOR = new Parcelable.Creator<WxArticle>() {
+        @Override
+        public WxArticle createFromParcel(Parcel source) {return new WxArticle(source);}
+
+        @Override
+        public WxArticle[] newArray(int size) {return new WxArticle[size];}
+    };
 }

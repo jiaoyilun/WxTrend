@@ -45,10 +45,9 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
         WxArticle article = articleList.get(position);
         holder.news_item_title.setText(article.getTitle());
         holder.news_item_date.setText(article.getDate());
-        ViewUtil.displayImg(context, article.getContentImg(), holder.news_item_icon);
+        ViewUtil.displayImg(context, article.getContentImg(), holder.news_item_icon,120,100);
 
-
-        holder.itemView.setTag(article.getUrl());
+        holder.itemView.setTag(article);
     }
 
     @Override

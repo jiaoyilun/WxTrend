@@ -8,14 +8,19 @@ import android.widget.ImageView;
 import com.fisher.wxtrend.ui.BadgeView;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 /**
  * Created by Administrator on 2016/7/15/.
  */
 public class ViewUtil {
 
-    public static final void displayImg(Context context, String url, ImageView destView) {
-        Picasso.with(context).load(url).resize(120, 100).centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(destView);
+    public static final void displayImg(Context context, String url, ImageView destView, int width, int height) {
+        RequestCreator creator = Picasso.with(context).load(url);
+        if (width * height > 0) {
+            creator.resize(width, height);
+        }
+        creator.centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(destView);
     }
 
     public static final BadgeView createBadgeView(Context context, View targetView) {
