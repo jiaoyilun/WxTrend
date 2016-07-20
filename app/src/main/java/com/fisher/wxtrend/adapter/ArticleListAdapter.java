@@ -35,7 +35,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
     @Override
     public RecVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_article, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_item_list_article, parent, false);
         view.setOnClickListener(this);
         return new RecVH(view);
     }
