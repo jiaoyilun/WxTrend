@@ -1,31 +1,26 @@
 package com.fisher.wxtrend.base;
 
-import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
 
-    /**
+   /* *//**
      * 视图对象
-     */
+     *//*
     public View mFragmentViewObject;
 
-    /**
+    *//**
      * 布局文件ID
-     */
+     *//*
     protected abstract int getLayoutId();
 
-    /**
+    *//**
      * 找到元素
      *
      * @param id
      * @param <T>
      * @return
-     */
+     *//*
     protected <T extends View> T findViewById(@IdRes int id) {
         return (T) mFragmentViewObject.findViewById(id);
     }
@@ -51,5 +46,5 @@ public abstract class BaseFragment extends Fragment {
             return;
 
         mParent.removeView(mFragmentViewObject);
-    }
+    }*/
 }

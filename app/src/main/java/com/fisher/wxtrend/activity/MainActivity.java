@@ -19,9 +19,7 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
     TabActionBarView tabActionBarView;
 
     private Fragment currentFragment;
-
     private ArticleFragment articleFragment;
-
     private NumFragment numFragment;
 
     private int resId = R.id.fragment_tab_content;

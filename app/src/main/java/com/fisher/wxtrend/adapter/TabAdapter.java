@@ -15,10 +15,6 @@ public class TabAdapter extends FragmentPagerAdapter {
 
     private List<WxType> typeList;
 
-    public TabAdapter(FragmentManager fm) {
-        super(fm);
-    }
-
     public TabAdapter(FragmentManager fm, List<WxType> typeList) {
         super(fm);
         this.typeList = typeList;

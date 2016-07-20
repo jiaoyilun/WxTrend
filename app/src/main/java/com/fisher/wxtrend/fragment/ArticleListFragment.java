@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.fisher.wxtrend.R;
 import com.fisher.wxtrend.activity.ArticleDetailActivity;
@@ -24,14 +26,18 @@ import com.google.gson.internal.LinkedTreeMap;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 /**
  * Created by Administrator on 2016/7/14/.
  */
 public class ArticleListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
-
-    private RecyclerView articleListView;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.view_list_article)
+    RecyclerView articleListView;
+    @BindView(R.id.id_swipe_ly)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private SubscriberOnNextListener getDataOnNext;
 
@@ -42,22 +48,13 @@ public class ArticleListFragment extends BaseFragment implements SwipeRefreshLay
 
     private String currentTypeId;
 
+
+    @Nullable
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_article_list;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        mLayoutManager = new LinearLayoutManager(getActivity());
-
-        articleListView = findViewById(R.id.view_list_article);
-        articleListView.setLayoutManager(mLayoutManager);
-
-        initSwipeRefreshView();
-        loadData(true);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_article_list, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -95,9 +92,22 @@ public class ArticleListFragment extends BaseFragment implements SwipeRefreshLay
         };
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
+
+        //        articleListView = findViewById(R.id.view_list_article);
+        articleListView.setLayoutManager(mLayoutManager);
+
+        initSwipeRefreshView();
+        loadData(true);
+    }
+
 
     private void initSwipeRefreshView() {
-        swipeRefreshLayout = findViewById(R.id.id_swipe_ly);
+        //        swipeRefreshLayout = findViewById(R.id.id_swipe_ly);
         swipeRefreshLayout.setOnRefreshListener(this);
         // 设置下拉圆圈上的颜色，蓝色、绿色、橙色、红色
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);

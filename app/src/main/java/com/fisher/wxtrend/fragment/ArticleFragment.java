@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -27,28 +28,36 @@ import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Administrator on 2016/7/19/.
  */
 public class ArticleFragment extends BaseFragment {
-    private TabPageIndicator mPageIndicator;
-    private ViewPager mViewPager;
-    private FragmentPagerAdapter fragPagerAdapter;
-    private RelativeLayout pageLayout;
+    @BindView(R.id.page_indicator)
+    TabPageIndicator mPageIndicator;
+    @BindView(R.id.view_pager)
+    ViewPager mViewPager;
+    @BindView(R.id.layout_page)
+    RelativeLayout pageLayout;
+    @BindView(R.id.btn_open)
+    ImageView typeOpenBtn;
 
-    private ImageView typeOpenBtn;
     private ImageView typeCloseBtn;
-
+    private FragmentPagerAdapter fragPagerAdapter;
     private PopupWindow typePopWin;
     private DragSortGridView mGridView;
     private GridViewSortAdapter mAdapter;
     private List<WxType> typeList;
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.layout_tabpage;
-    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.layout_tabpage, container, false);
+        ButterKnife.bind(this, view);
+        return view;
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -58,9 +67,9 @@ public class ArticleFragment extends BaseFragment {
     }
 
     public void initView() {
-        pageLayout = findViewById(R.id.layout_page);
-        mPageIndicator = findViewById(R.id.page_indicator);
-        mViewPager = findViewById(R.id.view_pager);
+        //        pageLayout = findViewById(R.id.layout_page);
+        //        mPageIndicator = findViewById(R.id.page_indicator);
+        //        mViewPager = findViewById(R.id.view_pager);
 
         SubscriberOnNextListener getDataOnNext = new SubscriberOnNextListener<List<WxType>>() {
             @Override
@@ -73,7 +82,7 @@ public class ArticleFragment extends BaseFragment {
                 mViewPager.setAdapter(fragPagerAdapter);
                 mPageIndicator.setViewPager(mViewPager, 0);
 
-                typeOpenBtn = findViewById(R.id.btn_open);
+                //                typeOpenBtn = findViewById(R.id.btn_open);
                 typeOpenBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -101,7 +110,7 @@ public class ArticleFragment extends BaseFragment {
                 typePopWin.setBackgroundDrawable(dw);
                 typePopWin.setAnimationStyle(R.style.PopupAnimation);
 
-                typeCloseBtn = (ImageView) popWinlayout.findViewById(R.id.btn_close);
+                typeCloseBtn = ButterKnife.findById(popWinlayout, R.id.btn_close);
                 typeCloseBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -110,7 +119,7 @@ public class ArticleFragment extends BaseFragment {
                 });
             }
 
-            mGridView = (DragSortGridView) popWinlayout.findViewById(R.id.activity_grid_view_sort_main);
+            mGridView = ButterKnife.findById(popWinlayout, R.id.activity_grid_view_sort_main);
             mAdapter = new GridViewSortAdapter(mGridView, getContext(), DataUtil.convertTypeToStr(typeList));
             mGridView.setAdapter(mAdapter);
 

@@ -75,9 +75,6 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
         public RecVH(View itemView) {
             super(itemView);
-           /* news_item_icon = (ImageView) itemView.findViewById(R.id.news_item_icon);
-            news_item_title = (TextView) itemView.findViewById(R.id.news_item_title);
-            news_item_date = (TextView) itemView.findViewById(R.id.news_item_date);*/
             ButterKnife.bind(this, itemView);
         }
     }
