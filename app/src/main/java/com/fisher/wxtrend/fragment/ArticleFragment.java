@@ -115,4 +115,6 @@ public class ArticleFragment extends BaseFragment {
 
         typePopWin.showAtLocation(mViewPager, Gravity.BOTTOM, 0, 0);
     }
+
+
 }

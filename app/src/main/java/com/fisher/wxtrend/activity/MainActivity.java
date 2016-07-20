@@ -80,6 +80,5 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
         switchFragment(currentFragment, articleFragment, resId);
         currentFragment = articleFragment;
     }
-
 }
 
