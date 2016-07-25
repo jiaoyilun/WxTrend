@@ -54,4 +54,7 @@
 
     <color name="gray_darker">#2b2b2b</color>
     <color name="gray_alpha_light">#90999999</color>
+
+    <color name="gray_color">#ffe8ecef</color>
+    <color name="bg_sort_color">#EDEDED</color>
 </resources>

@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">微信热点</string>
+    <string name="app_name">聚合玩</string>
 
     <string name="text_type_switch">切换栏目</string>
+    <string name="title_activity_side_bar">SideBarActivity</string>
+    <string name="search">搜索</string>
 
 </resources>

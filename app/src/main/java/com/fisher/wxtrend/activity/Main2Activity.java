@@ -13,7 +13,7 @@ import com.fisher.wxtrend.ui.TabActionBarView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements TabActionBarView.ITabActionCallback {
+public class Main2Activity extends BaseActivity implements TabActionBarView.ITabActionCallback {
 
     @BindView(R.id.tabActionBar)
     TabActionBarView tabActionBarView;
@@ -27,7 +27,7 @@ public class MainActivity extends BaseActivity implements TabActionBarView.ITabA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
         ButterKnife.bind(this);
 
         initUI();
