@@ -1,28 +1,35 @@
-package com.fisher.wxtrend.activity;
+package com.fisher.wxtrend.fragment;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fisher.wxtrend.R;
 import com.fisher.wxtrend.adapter.SortAdapter;
-import com.fisher.wxtrend.base.BaseActivity;
+import com.fisher.wxtrend.base.BaseFragment;
+import com.fisher.wxtrend.permission.EasyPermission;
 import com.fisher.wxtrend.po.SortModel;
 import com.fisher.wxtrend.ui.ClearEditTextView;
 import com.fisher.wxtrend.ui.SideBarView;
 import com.fisher.wxtrend.util.CharacterParser;
-import com.fisher.wxtrend.util.ConstactUtil;
+import com.fisher.wxtrend.util.ContactUtil;
+import com.fisher.wxtrend.util.LogUtil;
 import com.fisher.wxtrend.util.PinyinComparator;
 
 import java.util.ArrayList;
@@ -34,7 +41,10 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SideBarActivity extends BaseActivity {
+/**
+ * Created by Administrator on 2016/7/25/.
+ */
+public class ContactFragment extends BaseFragment implements EasyPermission.PermissionCallback {
 
     @BindView(R.id.filter_edit)
     ClearEditTextView mClearEditText;
@@ -52,22 +62,27 @@ public class SideBarActivity extends BaseActivity {
 
     private PinyinComparator pinyinComparator;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_side_bar);
-        ButterKnife.bind(this);
+    private static final int RC_SMS_PERM = 122;
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_contact, container, false);
+        ButterKnife.bind(this, view);
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        checkPermission();
     }
 
     private void initData() {
         // 实例化汉字转拼音类
         characterParser = CharacterParser.getInstance();
-
         pinyinComparator = new PinyinComparator();
-
         sideBar.setTextView(dialog);
-
         // 设置右侧触摸监听
         sideBar.setOnTouchingLetterChangedListener(new SideBarView.OnTouchingLetterChangedListener() {
 
@@ -82,7 +97,7 @@ public class SideBarActivity extends BaseActivity {
             }
         });
 
-        sortListView.setOnItemClickListener(new OnItemClickListener() {
+        sortListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -91,7 +106,7 @@ public class SideBarActivity extends BaseActivity {
                 // ((SortModel)adapter.getItem(position)).getName(),
                 // Toast.LENGTH_SHORT).show();
                 String number = callRecords.get(((SortModel) adapter.getItem(position)).getName());
-                Toast.makeText(SideBarActivity.this, number, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), number, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -104,7 +119,8 @@ public class SideBarActivity extends BaseActivity {
         @Override
         protected Integer doInBackground(Integer... arg0) {
             int result = -1;
-            callRecords = ConstactUtil.getAllCallRecords(SideBarActivity.this);
+            callRecords = ContactUtil.getAllCallRecords(getContext());
+            LogUtil.e(getActivity(), "size---->" + callRecords.size());
             result = 1;
             return result;
         }
@@ -124,11 +140,10 @@ public class SideBarActivity extends BaseActivity {
 
                 // 根据a-z进行排序源数据
                 Collections.sort(SourceDateList, pinyinComparator);
-                adapter = new SortAdapter(SideBarActivity.this, SourceDateList);
+                adapter = new SortAdapter(getContext(), SourceDateList);
                 sortListView.setAdapter(adapter);
 
-                mClearEditText = (ClearEditTextView) SideBarActivity.this.findViewById(R.id.filter_edit);
-                mClearEditText.setOnFocusChangeListener(new OnFocusChangeListener() {
+                mClearEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
                     @Override
                     public void onFocusChange(View arg0, boolean arg1) {
@@ -216,6 +231,47 @@ public class SideBarActivity extends BaseActivity {
         // 根据a-z进行排序
         Collections.sort(filterDateList, pinyinComparator);
         adapter.updateListView(filterDateList);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == EasyPermission.SETTINGS_REQ_CODE) {
+            boolean hasReadSmsPermission = EasyPermission.hasPermissions(getContext(), Manifest.permission.READ_CONTACTS);
+            String hasReadSmsPermissionText = getString(R.string.has_permission, hasReadSmsPermission);
+
+            Toast.makeText(getContext(), hasReadSmsPermissionText, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void checkPermission() {
+        EasyPermission.with(this).addRequestCode(RC_SMS_PERM).permissions(Manifest.permission.READ_CONTACTS).rationale(getString(R.string.rationale_permission)).request();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        EasyPermission.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
+
+
+    @Override
+    public void onPermissionGranted(int requestCode, List<String> perms) {
+        initData();
+    }
+
+    @Override
+    public void onPermissionDenied(int requestCode, List<String> perms) {
+
+        // Handle negative button on click listener
+        DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getContext(), R.string.settings_dialog_canceled, Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        EasyPermission.checkDeniedPermissionsNeverAskAgain(this, getString(R.string.rationale_ask_again), R.string.setting, R.string.cancel, onClickListener, perms);
     }
 
 }

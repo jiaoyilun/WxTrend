@@ -7,7 +7,7 @@ import android.provider.ContactsContract;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ConstactUtil {
+public class ContactUtil {
     /**
      * 获取所有数据
      * 

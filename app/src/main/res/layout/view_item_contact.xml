@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:gravity="center_vertical"
@@ -25,12 +26,19 @@
         android:orientation="horizontal"
         >
 
-        <com.fisher.wxtrend.ui.ImageTextView
-            android:id="@+id/icon"
-            android:layout_width="45dip"
+
+        <com.fisher.wxtrend.ui.CircleTextImageView
+            android:id="@+id/iv_head"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
-            android:text="find"
+            app:citv_border_color="@android:color/white"
+            app:citv_border_width="2dp"
+            android:layout_gravity="center"
+            app:citv_text_text="照片"
+            app:citv_text_size="32sp"
+            app:citv_text_padding="35dp"
+            app:citv_text_color="@android:color/white"
+            app:citv_fill_color="#50555D"
             />
 
         <TextView

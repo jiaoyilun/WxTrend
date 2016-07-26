@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.fisher.wxtrend.ui.TabActionBarView;
 import com.fisher.wxtrend.util.Constants;
-import com.fisher.wxtrend.util.LogUtil;
 
 /**
  * Created by Administrator on 2016/7/14/.
@@ -22,15 +21,12 @@ public class BaseActivity extends AppCompatActivity {
             return;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (from == null) {//初始化,no hide
-            LogUtil.e(this, "switch~~~~~~~init");
             transaction.add(resId, to).commit();
             return;
         }
         if (!to.isAdded()) {
-            LogUtil.e(this, "switch~~~~~~~add");
             transaction.hide(from).add(resId, to).commit();
         } else {
-            LogUtil.e(this, "switch~~~~~~~show");
             transaction.hide(from).show(to).commit();
         }
     }

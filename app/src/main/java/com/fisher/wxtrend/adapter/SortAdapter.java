@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.fisher.wxtrend.R;
 import com.fisher.wxtrend.po.SortModel;
-import com.fisher.wxtrend.ui.ImageTextView;
+import com.fisher.wxtrend.ui.CircleTextImageView;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
             view = LayoutInflater.from(mContext).inflate(R.layout.view_item_contact, null);
             viewHolder.tvTitle = (TextView) view.findViewById(R.id.title);
             viewHolder.tvLetter = (TextView) view.findViewById(R.id.catalog);
-            viewHolder.icon = (ImageTextView) view.findViewById(R.id.icon);
+            viewHolder.ivHead = (CircleTextImageView) view.findViewById(R.id.iv_head);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -75,8 +75,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
         }
 
         viewHolder.tvTitle.setText(this.list.get(position).getName());
-        viewHolder.icon.setText(this.list.get(position).getName());
-        viewHolder.icon.setIconText(mContext, this.list.get(position).getName());
+        viewHolder.ivHead.setText(this.list.get(position).getName().substring(0,1));
         return view;
 
     }
@@ -85,7 +84,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
     final static class ViewHolder {
         TextView tvLetter;
         TextView tvTitle;
-        ImageTextView icon;
+        CircleTextImageView ivHead;
 
     }
 
