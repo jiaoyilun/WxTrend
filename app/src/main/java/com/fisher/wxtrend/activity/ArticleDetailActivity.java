@@ -1,5 +1,7 @@
 package com.fisher.wxtrend.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -30,6 +32,7 @@ public class ArticleDetailActivity extends BaseActivity {
     @BindView(R.id.toolbar_detail)
     Toolbar mToolbar;
 
+    private final static String DATA = "data";
     private WxArticle article;
 
     @Override
@@ -38,7 +41,7 @@ public class ArticleDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_article_detail);
         ButterKnife.bind(this);
 
-        article = getIntent().getParcelableExtra("DATA");
+        article = getIntent().getParcelableExtra(DATA);
 
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
@@ -55,6 +58,12 @@ public class ArticleDetailActivity extends BaseActivity {
 
         mWebView.getSettings().setJavaScriptEnabled(false);
         mWebView.loadUrl(article.getUrl());
+    }
+
+    static public Intent newIntent(Context context, Bundle bundle) {
+        Intent newIntent = new Intent(context, ArticleDetailActivity.class);
+        newIntent.putExtra(DATA, bundle);
+        return newIntent;
     }
 
     @Override
