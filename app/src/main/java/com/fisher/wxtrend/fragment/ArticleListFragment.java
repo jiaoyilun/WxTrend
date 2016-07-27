@@ -47,7 +47,7 @@ public class ArticleListFragment extends BaseFragment implements SwipeRefreshLay
     private LinearLayoutManager mLayoutManager;
 
     private String currentTypeId;
-
+    private final static String TYPEID = "TYPEID";
 
     @Nullable
     @Override
@@ -61,7 +61,7 @@ public class ArticleListFragment extends BaseFragment implements SwipeRefreshLay
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        currentTypeId = getArguments().getString("TYPEID");
+        currentTypeId = getArguments().getString(TYPEID);
         totalList = new ArrayList<>();
         getDataOnNext = new SubscriberOnNextListener<PageData<LinkedTreeMap>>() {
             @Override
@@ -80,18 +80,12 @@ public class ArticleListFragment extends BaseFragment implements SwipeRefreshLay
                 articleListAdapter.setmOnItemClickListener(new ArticleListAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, Object obj) {
-                        /*Intent intent = new Intent();
+                        Intent intent = new Intent();
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("DATA", (WxArticle) obj);
                         intent.putExtras(bundle);
                         intent.setClass(getActivity(), ArticleDetailActivity.class);
-                        startActivity(intent);*/
-                        
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable("DATA", (WxArticle) obj);
-                        Intent intent = ArticleDetailActivity.newIntent(getContext(), bundle);
                         startActivity(intent);
-
                     }
                 });
             }

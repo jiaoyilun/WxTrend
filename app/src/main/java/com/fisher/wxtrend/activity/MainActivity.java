@@ -8,7 +8,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
@@ -16,6 +15,7 @@ import com.fisher.wxtrend.R;
 import com.fisher.wxtrend.base.BaseActivity;
 import com.fisher.wxtrend.fragment.ArticleFragment;
 import com.fisher.wxtrend.fragment.ContactFragment;
+import com.fisher.wxtrend.fragment.WeixinFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +29,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private ArticleFragment articleFragment;
     private ContactFragment contactFragment;
+    private WeixinFragment weixinFragment;
     private Fragment currentFragment;
 
     int currentId = R.id.nav_weixin;
@@ -58,8 +59,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        articleFragment = new ArticleFragment();
-        switchFragment(articleFragment);
+        weixinFragment = new WeixinFragment();
+        switchFragment(weixinFragment);
+        navigationView.setCheckedItem(R.id.nav_weixin_tabView);
 
     }
 
@@ -73,7 +75,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
-    @Override
+ /*   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -85,7 +87,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -105,6 +107,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         articleFragment = new ArticleFragment();
                     }
                     switchFragment(articleFragment);
+                    break;
+                case R.id.nav_weixin_tabView:
+                    if (null == weixinFragment) {
+                        weixinFragment = new WeixinFragment();
+                    }
+                    switchFragment(weixinFragment);
                     break;
                 case R.id.nav_contact:
                     if (null == contactFragment) {

@@ -78,6 +78,23 @@
     <style name="style_tab_selected" parent="style_tab">
         <item name="android:background">@drawable/tab_middle_select</item>
         <item name="android:textColor">@color/green_dark</item>
-
     </style>
+
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">?attr/colorAccent</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabBackground">@color/colorPrimary</item>
+        <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+        <item name="tabSelectedTextColor">?attr/colorAccent</item>
+    </style>
+
+    <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white_dark</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
 </resources>

@@ -110,13 +110,13 @@ public class ArticleFragment extends BaseFragment {
                 typePopWin.setBackgroundDrawable(dw);
                 typePopWin.setAnimationStyle(R.style.PopupAnimation);
 
-                typeCloseBtn = ButterKnife.findById(popWinlayout, R.id.btn_close);
+               /* typeCloseBtn = ButterKnife.findById(popWinlayout, R.id.btn_close);
                 typeCloseBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         typePopWin.dismiss();//PopUpWindow只有打开是才会触发
                     }
-                });
+                });*/
             }
 
             mGridView = ButterKnife.findById(popWinlayout, R.id.activity_grid_view_sort_main);
