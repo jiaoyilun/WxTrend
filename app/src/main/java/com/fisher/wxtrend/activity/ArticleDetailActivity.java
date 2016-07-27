@@ -43,7 +43,7 @@ public class ArticleDetailActivity extends BaseActivity {
 
         article = getIntent().getParcelableExtra(DATA);
 
-        mToolbar.setTitle("");
+        mToolbar.setTitle(article.getTitle());
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//设置是否有返回箭头
 
