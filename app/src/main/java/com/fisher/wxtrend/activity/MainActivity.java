@@ -15,6 +15,7 @@ import com.fisher.wxtrend.R;
 import com.fisher.wxtrend.base.BaseActivity;
 import com.fisher.wxtrend.fragment.ContactFragment;
 import com.fisher.wxtrend.fragment.WeixinFragment;
+import com.fisher.wxtrend.fragment.WzFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,11 +24,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.appBarLayout)
     AppBarLayout appBarLayout;
 
     private ContactFragment contactFragment;
     private WeixinFragment weixinFragment;
+    private WzFragment wzFragment;
     private Fragment currentFragment;
 
     int currentId = R.id.nav_weixin;
@@ -47,7 +51,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -106,11 +109,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     }
                     switchFragment(contactFragment);
                     break;
+                case R.id.nav_car:
+                    if (null == wzFragment) {
+                        wzFragment = new WzFragment();
+                    }
+                    switchFragment(wzFragment);
+                    break;
                 default:
                     break;
 
             }
             currentId = id;
+            toolbar.setTitle(item.getTitle());
         }
 
         drawer.closeDrawer(GravityCompat.START);

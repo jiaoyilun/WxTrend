@@ -15,8 +15,7 @@ import android.widget.ImageView;
 
 import com.fisher.wxtrend.adapter.GridViewSortAdapter;
 
-public class DragSortGridView extends GridView implements AdapterView.OnItemLongClickListener
-{
+public class DragSortGridView extends GridView implements AdapterView.OnItemLongClickListener {
 
     private static final String TAG = "DragSortGridView";
 
@@ -33,24 +32,20 @@ public class DragSortGridView extends GridView implements AdapterView.OnItemLong
 
     private boolean mDragStarted;
 
-    public DragSortGridView(Context context)
-    {
+    public DragSortGridView(Context context) {
         this(context, null);
     }
 
-    public DragSortGridView(Context context, AttributeSet attrs)
-    {
+    public DragSortGridView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public DragSortGridView(Context context, AttributeSet attrs, int defStyleAttr)
-    {
+    public DragSortGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initialize();
     }
 
-    private void initialize()
-    {
+    private void initialize() {
         mDragItemView = new ImageView(getContext());
 
         mWindowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -65,15 +60,13 @@ public class DragSortGridView extends GridView implements AdapterView.OnItemLong
 
 
     @Override
-    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l)
-    {
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
         // 至少有两个item的时候，才有排序
-        if (getChildCount() >= 2)
-        {
+        if (getChildCount() >= 2) {
 
             ((GridViewSortAdapter) getAdapter()).showBadgeView();
 
-            Log.d(TAG,"e");
+            Log.d(TAG, "e");
             mView = view;
             // 在调用getDrawingCache必须先调用
             view.setDrawingCacheEnabled(true);
@@ -109,20 +102,17 @@ public class DragSortGridView extends GridView implements AdapterView.OnItemLong
 
 
     @Override
-    public boolean onTouchEvent(MotionEvent ev)
-    {
+    public boolean onTouchEvent(MotionEvent ev) {
 
-        switch (ev.getAction() & ev.getActionMasked())
-        {
+        switch (ev.getAction() & ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 mDownX = (int) ev.getRawX();
                 mDownY = (int) ev.getRawY();
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                if (mDragStarted)
-                {
-                    Log.d(TAG,"c");
+                if (mDragStarted) {
+                    Log.d(TAG, "c");
                     // 保持中心
                     mDragItemLayoutParams.x = (int) (ev.getRawX() - mDragItemView.getWidth() / 2);
                     mDragItemLayoutParams.y = (int) (ev.getRawY() - mDragItemView.getHeight() / 2);
@@ -130,8 +120,7 @@ public class DragSortGridView extends GridView implements AdapterView.OnItemLong
                     mWindowManager.updateViewLayout(mDragItemView, mDragItemLayoutParams);
 
                     int position = pointToPosition((int) ev.getX(), (int) ev.getY());
-                    if (position != AdapterView.INVALID_POSITION && !((GridViewSortAdapter) getAdapter()).isInAnimation())
-                    {
+                    if (position != AdapterView.INVALID_POSITION && !((GridViewSortAdapter) getAdapter()).isInAnimation()) {
                         Log.d(TAG, "position = " + position);
                         ((GridViewSortAdapter) getAdapter()).swap(position);
                     }
@@ -139,9 +128,8 @@ public class DragSortGridView extends GridView implements AdapterView.OnItemLong
                 break;
 
             case MotionEvent.ACTION_UP:
-                if (mDragStarted)
-                {
-                    Log.d(TAG,"d");
+                if (mDragStarted) {
+                    Log.d(TAG, "d");
                     mWindowManager.removeView(mDragItemView);
                     ((GridViewSortAdapter) getAdapter()).clear();
                     mDragStarted = false;

@@ -37,7 +37,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/view_sort_grid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:clipToPadding="false"
         android:horizontalSpacing="10dp"
@@ -47,4 +47,5 @@
 
     </com.fisher.wxtrend.ui.DragSortGridView>
 
+    <LinearLayout style="@style/common_horizontal_division_line_style"/>
 </LinearLayout>

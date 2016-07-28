@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.fisher.wxtrend.R;
 import com.fisher.wxtrend.ui.BadgeView;
+import com.fisher.wxtrend.util.LogUtil;
 import com.fisher.wxtrend.util.ViewUtil;
 
 import java.util.ArrayList;
@@ -24,8 +25,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/7/14/.
  */
-public class GridViewSortAdapter extends BaseAdapter implements View.OnClickListener
-{
+public class GridViewSortAdapter extends BaseAdapter implements View.OnClickListener {
     private static final String TAG = "GridViewSortAdapter";
 
     private Context mContext;
@@ -52,8 +52,7 @@ public class GridViewSortAdapter extends BaseAdapter implements View.OnClickList
 
     private boolean showBadgeView;
 
-    public GridViewSortAdapter(GridView gridView, Context context, List<String> typeTitle)
-    {
+    public GridViewSortAdapter(GridView gridView, Context context, List<String> typeTitle) {
         mContext = context;
         mTypeTitle = typeTitle;
         mHorizontalSpace = gridView.getRequestedHorizontalSpacing();
@@ -62,23 +61,18 @@ public class GridViewSortAdapter extends BaseAdapter implements View.OnClickList
     }
 
 
-    public void hideView(int item)
-    {
+    public void hideView(int item) {
         resetPositionList();
         mStartHideItemPosition = mCurrentHideItemPosition = item;
         notifyDataSetChanged();
     }
 
-    public void clear()
-    {
+    public void clear() {
         String value = mTypeTitle.get(mStartHideItemPosition);
-        if (mStartHideItemPosition < mCurrentHideItemPosition)
-        {
+        if (mStartHideItemPosition < mCurrentHideItemPosition) {
             mTypeTitle.add(mCurrentHideItemPosition + 1, value);
             mTypeTitle.remove(mStartHideItemPosition);
-        }
-        else if (mStartHideItemPosition > mCurrentHideItemPosition)
-        {
+        } else if (mStartHideItemPosition > mCurrentHideItemPosition) {
             mTypeTitle.add(mCurrentHideItemPosition, value);
             mTypeTitle.remove(mStartHideItemPosition + 1);
         }
@@ -87,64 +81,48 @@ public class GridViewSortAdapter extends BaseAdapter implements View.OnClickList
 
         notifyDataSetChanged();
 
-        for (AnimatorSet set : mAnimatorSetList)
-        {
+        for (AnimatorSet set : mAnimatorSetList) {
             set.cancel();
         }
 
         mAnimatorSetList.clear();
 
-        for (int i = 0; i < mGridView.getChildCount(); i++)
-        {
+        for (int i = 0; i < mGridView.getChildCount(); i++) {
             mGridView.getChildAt(i).setTranslationX(0);
             mGridView.getChildAt(i).setTranslationY(0);
         }
     }
 
 
-    public void init()
-    {
+    public void init() {
         View view = mGridView.getChildAt(0);
         mTranslateX = view.getWidth() + mHorizontalSpace;
         mTranslateY = view.getHeight() + mVerticalSpace;
         mColsNum = mGridView.getNumColumns();
     }
 
-    public void swap(int position)
-    {
+    public void swap(int position) {
         mAnimatorSetList.clear();
 
         int r_p = mPositionList.indexOf(position);
 
         Log.d(TAG, "r_p = " + r_p);
 
-        if (mCurrentHideItemPosition < r_p)
-        {
-            for (int i = mCurrentHideItemPosition + 1; i <= r_p; i++)
-            {
+        if (mCurrentHideItemPosition < r_p) {
+            for (int i = mCurrentHideItemPosition + 1; i <= r_p; i++) {
                 View v = mGridView.getChildAt(mPositionList.get(i));
-                if (i % mColsNum == 0 && i > 0)
-                {
-                    startMoveAnimation(v, v.getTranslationX() + mTranslateX * (mColsNum - 1), v.getTranslationY() -
-                            mTranslateY);
-                }
-                else
-                {
+                if (i % mColsNum == 0 && i > 0) {
+                    startMoveAnimation(v, v.getTranslationX() + mTranslateX * (mColsNum - 1), v.getTranslationY() - mTranslateY);
+                } else {
                     startMoveAnimation(v, v.getTranslationX() - mTranslateX, 0);
                 }
             }
-        }
-        else if (mCurrentHideItemPosition > r_p)
-        {
-            for (int i = r_p; i < mCurrentHideItemPosition; i++)
-            {
+        } else if (mCurrentHideItemPosition > r_p) {
+            for (int i = r_p; i < mCurrentHideItemPosition; i++) {
                 View v = mGridView.getChildAt(mPositionList.get(i));
-                if ((i + 1) % mColsNum == 0)
-                {
+                if ((i + 1) % mColsNum == 0) {
                     startMoveAnimation(v, v.getTranslationX() - mTranslateX * (mColsNum - 1), v.getTranslationY() + mTranslateY);
-                }
-                else
-                {
+                } else {
                     startMoveAnimation(v, v.getTranslationX() + mTranslateX, 0);
                 }
             }
@@ -153,13 +131,10 @@ public class GridViewSortAdapter extends BaseAdapter implements View.OnClickList
         resetPositionList();
 
         int value = mPositionList.get(mStartHideItemPosition);
-        if (mStartHideItemPosition < r_p)
-        {
+        if (mStartHideItemPosition < r_p) {
             mPositionList.add(r_p + 1, value);
             mPositionList.remove(mStartHideItemPosition);
-        }
-        else if (mStartHideItemPosition > r_p)
-        {
+        } else if (mStartHideItemPosition > r_p) {
             mPositionList.add(r_p, value);
             mPositionList.remove(mStartHideItemPosition + 1);
         }
@@ -167,51 +142,39 @@ public class GridViewSortAdapter extends BaseAdapter implements View.OnClickList
         mCurrentHideItemPosition = r_p;
     }
 
-    public boolean isInAnimation()
-    {
+    public boolean isInAnimation() {
         return mInAnimation;
     }
 
-    private void resetPositionList()
-    {
+    private void resetPositionList() {
         mPositionList.clear();
-        for (int i = 0; i < mGridView.getChildCount(); i++)
-        {
+        for (int i = 0; i < mGridView.getChildCount(); i++) {
             mPositionList.add(i);
         }
     }
 
 
-    private void startMoveAnimation(View myView, float x, float y)
-    {
+    private void startMoveAnimation(View myView, float x, float y) {
         AnimatorSet set = new AnimatorSet();
-        set.playTogether(
-                ObjectAnimator.ofFloat(myView, "translationX", myView.getTranslationX(), x),
-                ObjectAnimator.ofFloat(myView, "translationY", myView.getTranslationY(), y)
-        );
-        set.addListener(new Animator.AnimatorListener()
-        {
+        set.playTogether(ObjectAnimator.ofFloat(myView, "translationX", myView.getTranslationX(), x), ObjectAnimator.ofFloat(myView, "translationY", myView.getTranslationY(), y));
+        set.addListener(new Animator.AnimatorListener() {
             @Override
-            public void onAnimationStart(Animator animator)
-            {
+            public void onAnimationStart(Animator animator) {
                 mInAnimation = true;
             }
 
             @Override
-            public void onAnimationEnd(Animator animator)
-            {
+            public void onAnimationEnd(Animator animator) {
                 mInAnimation = false;
             }
 
             @Override
-            public void onAnimationCancel(Animator animator)
-            {
+            public void onAnimationCancel(Animator animator) {
 
             }
 
             @Override
-            public void onAnimationRepeat(Animator animator)
-            {
+            public void onAnimationRepeat(Animator animator) {
 
             }
         });
@@ -220,53 +183,43 @@ public class GridViewSortAdapter extends BaseAdapter implements View.OnClickList
     }
 
     @Override
-    public int getCount()
-    {
+    public int getCount() {
         return mTypeTitle.size();
     }
 
     @Override
-    public Object getItem(int i)
-    {
+    public Object getItem(int i) {
         return mTypeTitle.get(i);
     }
 
     @Override
-    public long getItemId(int i)
-    {
+    public long getItemId(int i) {
         return i;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
+    public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
-        if (convertView == null)
-        {
+        if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.view_item_grid_view_sort, null);
             holder = new ViewHolder();
             holder.title = (TextView) convertView.findViewById(R.id.view_item_grid_view_sort_title);
             convertView.setTag(holder);
-        }
-        else
-        {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.title.setText(mTypeTitle.get(position));
-
-        if(showBadgeView){
-            holder.closeBtn = ViewUtil.createBadgeView(mContext,holder.title);
+        LogUtil.e(this,"getView--->"+showBadgeView);
+        if (showBadgeView) {
+            holder.closeBtn = ViewUtil.createBadgeView(mContext, holder.title);
             holder.closeBtn.setTargetView(holder.title);
             holder.closeBtn.setTag(position);
             holder.closeBtn.setOnClickListener(this);
         }
 
-        if (mStartHideItemPosition == position)
-        {
+        if (mStartHideItemPosition == position) {
             convertView.setVisibility(View.INVISIBLE);
-        }
-        else
-        {
+        } else {
             convertView.setVisibility(View.VISIBLE);
         }
         return convertView;
@@ -274,20 +227,25 @@ public class GridViewSortAdapter extends BaseAdapter implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(mContext,"删除了"+v.getTag(),Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext, "删除了" + v.getTag(), Toast.LENGTH_LONG).show();
         this.hideView((Integer) v.getTag());
     }
 
-    class ViewHolder
-    {
+    class ViewHolder {
         public TextView title;
         public BadgeView closeBtn;
 
     }
 
-    public void showBadgeView(){
+    public void showBadgeView() {
         showBadgeView = true;
         notifyDataSetChanged();
+    }
+
+    public void notifyManagerComplete() {
+        showBadgeView = false;
+        notifyDataSetChanged();
+        LogUtil.e(this,"notifyManagerComplete");
     }
 
 }

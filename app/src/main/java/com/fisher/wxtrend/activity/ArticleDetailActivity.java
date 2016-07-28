@@ -2,6 +2,7 @@ package com.fisher.wxtrend.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
@@ -31,6 +32,8 @@ public class ArticleDetailActivity extends BaseActivity {
     TextView tv_source;
     @BindView(R.id.toolbar_detail)
     Toolbar mToolbar;
+    @BindView(R.id.layout_collapsingToolbar)
+    CollapsingToolbarLayout collapsingToolbarLayout;
 
     private final static String DATA = "DATA";
     private WxArticle article;
@@ -46,6 +49,7 @@ public class ArticleDetailActivity extends BaseActivity {
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//设置是否有返回箭头
+        //        collapsingToolbarLayout.setTitle(article.getTitle());
 
 
         initView();

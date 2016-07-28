@@ -15,6 +15,7 @@
 
     <string name="menu_item_weixin">热门文章</string>
     <string name="menu_item_contact">联系人</string>
+    <string name="menu_item_car">违章查询</string>
 
     <string name="has_permission">已获取权限: %b</string>
     <string name="rationale_permission">需要获取系统权限</string>
@@ -24,4 +25,7 @@
 
     <string name="action_complete">完成</string>
 
+    <string name="text_carNum">车牌号</string>
+
+    <string name="action_ok">确定</string>
 </resources>

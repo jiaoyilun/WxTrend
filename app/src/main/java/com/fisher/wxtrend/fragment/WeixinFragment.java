@@ -128,12 +128,14 @@ public class WeixinFragment extends BaseFragment {
         }
         typeManagerView.showAtLocation(mViewPager, Gravity.BOTTOM, 0, 0);
 
+
     }
 
     private void closeTypeManager() {
         if (null != typeManagerView && typeManagerView.isShowing()) {
             typeManagerView.dismiss();
             toggleMenuVisible();
+            mAdapter.notifyManagerComplete();
         }
     }
 
