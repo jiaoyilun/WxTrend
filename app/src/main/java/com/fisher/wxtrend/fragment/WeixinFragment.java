@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.PopupWindow;
 
 import com.fisher.wxtrend.R;
@@ -23,7 +24,6 @@ import com.fisher.wxtrend.subscribers.ProgressSubscriber;
 import com.fisher.wxtrend.subscribers.SubscriberOnNextListener;
 import com.fisher.wxtrend.ui.DragSortGridView;
 import com.fisher.wxtrend.util.DataUtil;
-import com.fisher.wxtrend.util.LogUtil;
 
 import java.util.List;
 
@@ -102,7 +102,7 @@ public class WeixinFragment extends BaseFragment {
         toggleMenuVisible();//菜单点击之后，弹出层，隐藏菜单
 
         if (typeManagerView == null) {
-            View popWinlayout = LayoutInflater.from(getContext()).inflate(R.layout.layout_popup_type, null);
+            View popWinlayout = LayoutInflater.from(getContext()).inflate(R.layout.layout_manager_type, null);
 
             int width = view.getWidth();
             int height = view.getHeight();
@@ -112,13 +112,13 @@ public class WeixinFragment extends BaseFragment {
                 typeManagerView.setBackgroundDrawable(dw);
                 typeManagerView.setAnimationStyle(R.style.PopupAnimation);
 
-                //                typeCloseBtn = ButterKnife.findById(popWinlayout, R.id.btn_close);
-                //                typeCloseBtn.setOnClickListener(new View.OnClickListener() {
-                //                    @Override
-                //                    public void onClick(View v) {
-                //                        typePopWin.dismiss();//PopUpWindow只有打开是才会触发
-                //                    }
-                //                });
+                Button completeBtn = ButterKnife.findById(popWinlayout, R.id.btn_manager_complete);
+                completeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        closeTypeManager();//PopUpWindow只有打开是才会触发
+                    }
+                });
             }
 
             mGridView = ButterKnife.findById(popWinlayout, R.id.activity_grid_view_sort_main);
@@ -130,10 +130,10 @@ public class WeixinFragment extends BaseFragment {
 
     }
 
-    void closeTypeManager() {
-        LogUtil.e(this, "close");
+    private void closeTypeManager() {
         if (null != typeManagerView && typeManagerView.isShowing()) {
             typeManagerView.dismiss();
+            toggleMenuVisible();
         }
     }
 

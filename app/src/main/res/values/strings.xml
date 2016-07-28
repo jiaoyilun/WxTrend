@@ -23,4 +23,6 @@
 
     <string name="action_manager_type">栏目管理</string>
 
+    <string name="action_complete">完成</string>
+
 </resources>

@@ -100,7 +100,7 @@ public class ArticleFragment extends BaseFragment {
     private void showTypePopWin() {
         if (typePopWin == null) {
             LogUtil.e(this, "popupWin init");
-            View popWinlayout = LayoutInflater.from(getContext()).inflate(R.layout.layout_popup_type, null);
+            View popWinlayout = LayoutInflater.from(getContext()).inflate(R.layout.layout_manager_type, null);
 
             int width = mViewPager.getWidth();
             int height = pageLayout.getHeight();
