@@ -35,7 +35,7 @@
 
     <com.fisher.wxtrend.ui.DragSortGridView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/activity_grid_view_sort_main"
+        android:id="@+id/view_sort_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"

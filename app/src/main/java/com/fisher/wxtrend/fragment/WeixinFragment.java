@@ -121,7 +121,7 @@ public class WeixinFragment extends BaseFragment {
                 });
             }
 
-            mGridView = ButterKnife.findById(popWinlayout, R.id.activity_grid_view_sort_main);
+            mGridView = ButterKnife.findById(popWinlayout, R.id.view_sort_grid);
             mAdapter = new GridViewSortAdapter(mGridView, getContext(), DataUtil.convertTypeToStr(typeList));
             mGridView.setAdapter(mAdapter);
 
