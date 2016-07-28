@@ -13,8 +13,7 @@
     <string name="settings_dialog_canceled">对话框关闭</string>
 
 
-    <string name="menu_item_weixin_tabIndicator">热门微信(Indicator)</string>
-    <string name="menu_item_weixin_tabView">热门微信(TabView)</string>
+    <string name="menu_item_weixin">热门文章</string>
     <string name="menu_item_contact">联系人</string>
 
     <string name="has_permission">已获取权限: %b</string>

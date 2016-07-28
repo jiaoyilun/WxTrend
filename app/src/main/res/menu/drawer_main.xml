@@ -5,11 +5,7 @@
         <item
             android:id="@+id/nav_weixin"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_item_weixin_tabIndicator"/>
-        <item
-            android:id="@+id/nav_weixin_tabView"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_item_weixin_tabView"/>
+            android:title="@string/menu_item_weixin"/>
         <item
             android:id="@+id/nav_contact"
             android:icon="@drawable/ic_menu_gallery"

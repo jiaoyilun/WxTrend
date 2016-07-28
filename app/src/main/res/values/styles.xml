@@ -16,57 +16,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-
-    <style name="MyTheme" parent="AppTheme">
-        <item name="vpiTabPageIndicatorStyle">@style/TabPageIndicator_MyWidget</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:animationDuration">5000</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
-
-    <style name="TabPageIndicator_MyWidget" parent="Widget">
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/vpi__tab_indicator</item>
-        <item name="android:paddingLeft">22dip</item>
-        <item name="android:paddingRight">22dip</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
-        <item name="android:textAppearance">@style/TabPageIndicator_MyTextAppearance</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:maxLines">1</item>
-    </style>
-
-    <style name="TabPageIndicator_MyTextAppearance" parent="Widget">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
     <style name="PopupAnimation" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@animator/popup_enter</item>
         <item name="android:windowExitAnimation">@animator/popup_exit</item>
     </style>
-
-    <style name="setting_sub_font">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?textColor</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="title_bar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/md_title_bar_height</item>
-        <item name="android:background">@color/gray_darker</item>
-    </style>
-
-    <style name="title_bar_button">
-        <item name="android:layout_width">@dimen/md_title_bar_height</item>
-        <item name="android:layout_height">@dimen/md_title_bar_height</item>
-        <item name="android:background">@drawable/transparent_gray_circle_selector</item>
-        <item name="android:padding">13dp</item>
-        <item name="android:scaleType">fitXY</item>
-    </style>
-
 
     <style name="style_tab">
         <item name="android:layout_width">76dp</item>

@@ -13,7 +13,6 @@ import android.view.WindowManager;
 
 import com.fisher.wxtrend.R;
 import com.fisher.wxtrend.base.BaseActivity;
-import com.fisher.wxtrend.fragment.ArticleFragment;
 import com.fisher.wxtrend.fragment.ContactFragment;
 import com.fisher.wxtrend.fragment.WeixinFragment;
 
@@ -27,7 +26,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.appBarLayout)
     AppBarLayout appBarLayout;
 
-    private ArticleFragment articleFragment;
     private ContactFragment contactFragment;
     private WeixinFragment weixinFragment;
     private Fragment currentFragment;
@@ -61,7 +59,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         weixinFragment = new WeixinFragment();
         switchFragment(weixinFragment);
-        navigationView.setCheckedItem(R.id.nav_weixin_tabView);
+        navigationView.setCheckedItem(R.id.nav_weixin);
 
     }
 
@@ -94,21 +92,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-     /*   if(id==R.id.nav_weixin){
-            if(appBarLayout.isShown())getActionBar().hide();
-        }else{
-            if(!getActionBar().isShowing())getActionBar().show();
-        }
-*/
         if (currentId != id) {
             switch (id) {
                 case R.id.nav_weixin:
-                    if (null == articleFragment) {
-                        articleFragment = new ArticleFragment();
-                    }
-                    switchFragment(articleFragment);
-                    break;
-                case R.id.nav_weixin_tabView:
                     if (null == weixinFragment) {
                         weixinFragment = new WeixinFragment();
                     }

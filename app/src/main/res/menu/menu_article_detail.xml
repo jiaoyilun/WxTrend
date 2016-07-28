@@ -8,25 +8,4 @@
         android:orderInCategory="100"
         android:title="分享"
         app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/action_linear"
-        android:orderInCategory="100"
-        android:title="LinearLayout"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/action_grid"
-        android:orderInCategory="100"
-        android:title="垂直GridLayout"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/action_staggeredgrid"
-        android:orderInCategory="100"
-        android:title="StaggeredGridLayout"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/action_grid_horizontal"
-        android:orderInCategory="100"
-        android:title="水平GridLayout"
-        app:showAsAction="never"/>
-
 </menu>
